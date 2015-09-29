@@ -96,6 +96,7 @@
     <ClCompile Include="FWApplication.cpp" />
     <ClCompile Include="Graph.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="MovingEntity.cpp" />
     <ClCompile Include="Node.cpp" />
     <ClCompile Include="Pill.cpp" />
     <ClCompile Include="ProbabilityDistribution.cpp" />
@@ -123,6 +124,7 @@
     <ClInclude Include="FWApplication.h" />
     <ClInclude Include="Graph.h" />
     <ClInclude Include="IGameObject.h" />
+    <ClInclude Include="MovingEntity.h" />
     <ClInclude Include="Node.h" />
     <ClInclude Include="Pill.h" />
     <ClInclude Include="ProbabilityDistribution.h" />
