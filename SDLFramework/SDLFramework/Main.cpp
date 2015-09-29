@@ -4,7 +4,7 @@
 #include <SDL_events.h>
 #include <time.h>
 #include "AStar.h"
-#include "Graph.h"
+#include "Arena.h"
 #include "Dashboard.h"
 
 int main(int args[])
@@ -20,7 +20,7 @@ int main(int args[])
 
 	application->SetTargetFPS(60);
 
-	auto graph = new Graph(application);									// Create a graph
+	auto arena = new Arena();
 	auto dashboard = new Dashboard();										// To show some statistics such as shortestPath, Cow state and rabbit state
 
 	while (application->IsRunning())
@@ -49,7 +49,6 @@ int main(int args[])
 				}
 				break;
 			case SDL_MOUSEBUTTONDOWN:
-				graph->cow->OnClick(event);								// Handle mouse clicks for the cow
 				break;
 			}
 		}

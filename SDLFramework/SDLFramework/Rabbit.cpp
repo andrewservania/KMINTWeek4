@@ -4,11 +4,13 @@
 Rabbit::Rabbit(int id) : BaseGameEntity(id)
 {
 	mTexture = mApplication->LoadTexture("rabbit-3.png");
-	setCurrentNode(Graph::graphNodes.at(rand() % 8));					// Put the rabbit on a random node on the screen
 	pickedUpPill = false;
 	pickedUpWeapon = false;
-	mApplication->AddRenderable(this);
 
+	mX = 500;
+	mY = 500;
+
+	mApplication->AddRenderable(this);
 	stateMachine = new StateMachine<Rabbit>(this);
 	stateMachine->SetCurrentState(RabbitWanderingState::Instance());
 }
@@ -19,7 +21,7 @@ Rabbit::~Rabbit()
 
 void Rabbit::Update(float deltaTime)
 {
-	stateMachine->Update();
+//	stateMachine->Update();
 }
 
 // Draw the rabbit texture

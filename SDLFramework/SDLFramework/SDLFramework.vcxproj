@@ -84,10 +84,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Arena.cpp" />
     <ClCompile Include="AStar.cpp" />
     <ClCompile Include="BaseGameEntity.cpp" />
     <ClCompile Include="Cow.cpp" />
     <ClCompile Include="CowChaseRabbitState.cpp" />
+    <ClCompile Include="CowPursuitState.cpp" />
     <ClCompile Include="CowSleepingState.cpp" />
     <ClCompile Include="Dashboard.cpp" />
     <ClCompile Include="Edge.cpp" />
@@ -108,11 +110,13 @@
     <None Include="SDL2.dll" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Arena.h" />
     <ClInclude Include="AStar.h" />
     <ClInclude Include="BaseGameEntity.h" />
     <ClInclude Include="Cow.h" />
     <ClInclude Include="Config.h" />
     <ClInclude Include="CowChaseRabbitState.h" />
+    <ClInclude Include="CowPursuitState.h" />
     <ClInclude Include="CowSleepingState.h" />
     <ClInclude Include="Dashboard.h" />
     <ClInclude Include="Edge.h" />

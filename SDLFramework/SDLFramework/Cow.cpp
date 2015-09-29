@@ -4,7 +4,7 @@
 #include <string>
 #include <memory>
 #include <assert.h>
-#include "CowChaseRabbitState.h"
+#include "CowPursuitState.h"
 
 using namespace std;
 
@@ -15,17 +15,11 @@ Cow::Cow(int id) : BaseGameEntity(id)
 	mX = 100;
 	mY = 100;
 
-	setCurrentNode(Graph::graphNodes.at(rand() % 8));
-
-	while (currentNode->id == Graph::rabbit->getCurrentNode()->id ||
-		currentNode->id == Graph::pill->GetCurrentNode()->id ||
-		currentNode->id == Graph::weapon->GetCurrentNode()->id)	   // Put the cow on a random location as long as its not the same location as the rabbit,
-		setCurrentNode(Graph::graphNodes.at(rand() % 8));		   // pill and weapon
 
 	// Add sample code here that is responsible for updating the cow
 	// Set up the state machine
 	stateMachine = new StateMachine<Cow>(this);
-	stateMachine->SetCurrentState(CowChaseRabbitState::Instance());
+	stateMachine->SetCurrentState(CowPursuitState::Instance());
 	//stateMachine->SetGlobalState()
 	// TODO: 3) Make sure the rabbit can also change from state (For example a fleeing state) You'll have to delay the screen in terms of refresh rate in order to show it
 	// TODO: 4) Make sure you put state labels for the cow and rabbit and make sure to update them accordingly!
@@ -84,9 +78,5 @@ void Cow::OnRightClick(SDL_Event &event)
 // Put the cow at a random node that is not the same as the rabbit, weapon and pill
 void Cow::PutOnRandomLocation()
 {
-	setCurrentNode(Graph::graphNodes.at(rand() % Graph::graphNodes.size()));
-	while (Graph::weapon->GetCurrentNode()->id == currentNode->id ||
-		Graph::rabbit->getCurrentNode()->id == currentNode->id ||
-		Graph::pill->GetCurrentNode()->id == currentNode->id)
-		setCurrentNode(Graph::graphNodes.at(rand() % Graph::graphNodes.size()));
+
 }
