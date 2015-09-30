@@ -150,7 +150,7 @@ public:
 	/// <param name="offsetX">	The offset x coordinate. </param>
 	/// <param name="offsetY">	The offset y coordinate. </param>
 	////////////////////////////////////////////////////////////////////////////////////////////////////
-	void DrawText(const std::string & message, uint32_t offsetX, uint32_t offsetY);
+	void DrawTextOnScreen(const std::string & message, uint32_t offsetX, uint32_t offsetY);
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////
 	/// <summary>	Start of the cycle, catches input, etc. </summary>

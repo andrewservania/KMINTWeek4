@@ -26,7 +26,7 @@ void Node::Draw()
 	//SDL work by a coloring on layer basis
 	mApplication->SetColor(Color(0, 0, 255, 255));
 	mApplication->DrawRect(mX, mY, mWidth, mHeight, true);
-	mApplication->DrawText(std::to_string(id), this->mX, this->mY - 60);
+	mApplication->DrawTextOnScreen(std::to_string(id), this->mX, this->mY - 60);
 
 	mApplication->SetColor(Color(255, 255, 255, 255));
 }

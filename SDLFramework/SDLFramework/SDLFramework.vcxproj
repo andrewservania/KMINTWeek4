@@ -105,6 +105,7 @@
     <ClCompile Include="RabbitSearchForPillState.cpp" />
     <ClCompile Include="RabbitSearchForWeaponState.cpp" />
     <ClCompile Include="RabbitWanderingState.cpp" />
+    <ClCompile Include="Vector2d.cpp" />
     <ClCompile Include="Weapon.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -135,6 +136,8 @@
     <ClInclude Include="RabbitWanderingState.h" />
     <ClInclude Include="State.h" />
     <ClInclude Include="StateMachine.h" />
+    <ClInclude Include="utils.h" />
+    <ClInclude Include="Vector2D.h" />
     <ClInclude Include="Weapon.h" />
   </ItemGroup>
   <ItemGroup>

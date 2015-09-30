@@ -12,7 +12,7 @@ public:
 	 static Rabbit*rabbit;
 	Arena();
 	~Arena();
-
 	void Update(float deltaTime) override;
+
 };
 

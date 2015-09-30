@@ -1,3 +1,4 @@
+
 #include "Dashboard.h"
 #include "FWApplication.h"
 #include "Arena.h"
@@ -68,38 +69,38 @@ Dashboard::~Dashboard()
 void Dashboard::Update()
 {
 	// Application information
-	FWApplication::GetInstance()->DrawText(applicationInformation, 300, 50);
+	FWApplication::GetInstance()->DrawTextOnScreen(applicationInformation, 300, 50);
 
 	// KMINT Week 3 Description
-	FWApplication::GetInstance()->DrawText(comment1, 300, 100);
-	FWApplication::GetInstance()->DrawText(comment2, 300, 120);
-	FWApplication::GetInstance()->DrawText(comment3, 300, 140);
-	FWApplication::GetInstance()->DrawText(comment4, 300, 180);
-	FWApplication::GetInstance()->DrawText(comment5, 300, 200);
-	FWApplication::GetInstance()->DrawText(comment6, 300, 220);
-	FWApplication::GetInstance()->DrawText(comment7, 300, 240);
-	FWApplication::GetInstance()->DrawText(comment8, 300, 260);
-	FWApplication::GetInstance()->DrawText(comment9, 300, 280);
-	FWApplication::GetInstance()->DrawText(comment10, 300, 320);
-	FWApplication::GetInstance()->DrawText(comment11, 300, 340);
-	FWApplication::GetInstance()->DrawText(comment12, 300, 360);
-	FWApplication::GetInstance()->DrawText(comment13, 300, 380);
+	FWApplication::GetInstance()->DrawTextOnScreen(comment1, 300, 100);
+	FWApplication::GetInstance()->DrawTextOnScreen(comment2, 300, 120);
+	FWApplication::GetInstance()->DrawTextOnScreen(comment3, 300, 140);
+	FWApplication::GetInstance()->DrawTextOnScreen(comment4, 300, 180);
+	FWApplication::GetInstance()->DrawTextOnScreen(comment5, 300, 200);
+	FWApplication::GetInstance()->DrawTextOnScreen(comment6, 300, 220);
+	FWApplication::GetInstance()->DrawTextOnScreen(comment7, 300, 240);
+	FWApplication::GetInstance()->DrawTextOnScreen(comment8, 300, 260);
+	FWApplication::GetInstance()->DrawTextOnScreen(comment9, 300, 280);
+	FWApplication::GetInstance()->DrawTextOnScreen(comment10, 300, 320);
+	FWApplication::GetInstance()->DrawTextOnScreen(comment11, 300, 340);
+	FWApplication::GetInstance()->DrawTextOnScreen(comment12, 300, 360);
+	FWApplication::GetInstance()->DrawTextOnScreen(comment13, 300, 380);
 
 	// Cow state label
 	CowStateLabel(Arena::cow->GetCurrentState());
-	FWApplication::GetInstance()->DrawText(cowStateLabel, 300, 420);
+	FWApplication::GetInstance()->DrawTextOnScreen(cowStateLabel, 300, 420);
 
 
 	// Rabbit state label
 	RabbitStateLabel(Arena::rabbit->GetCurrentState());
-	FWApplication::GetInstance()->DrawText(rabbitStateLabel, 300, 460);
+	FWApplication::GetInstance()->DrawTextOnScreen(rabbitStateLabel, 300, 460);
 
 	// Shortest path label
-	FWApplication::GetInstance()->DrawText(shortestPathLabel, 300, 500);
+	FWApplication::GetInstance()->DrawTextOnScreen(shortestPathLabel, 300, 500);
 
 	// Probabilities
-	//FWApplication::GetInstance()->DrawText(choice1Probability, 300, 540);
-	//FWApplication::GetInstance()->DrawText(choice2Probability, 300, 560);
-	//FWApplication::GetInstance()->DrawText(choice3Probability, 300, 580);
+	//FWApplication::GetInstance()->DrawTextOnScreen(choice1Probability, 300, 540);
+	//FWApplication::GetInstance()->DrawTextOnScreen(choice2Probability, 300, 560);
+	//FWApplication::GetInstance()->DrawTextOnScreen(choice3Probability, 300, 580);
 
 }

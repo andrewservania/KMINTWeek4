@@ -331,7 +331,7 @@ uint32_t FWApplication::GetTimeSinceStartedMS() const
 	return mTimeMS;
 }
 
-void FWApplication::DrawText(const std::string & message, uint32_t offsetX, uint32_t offsetY)
+void FWApplication::DrawTextOnScreen(const std::string & message, uint32_t offsetX, uint32_t offsetY)
 {
 	SDL_Color color = { mColor.r, mColor.g, mColor.b, mColor.a };
 	//SDL_Color bgColor = { mTextBackgroundColor.r, mTextBackgroundColor.g, mTextBackgroundColor.b, mTextBackgroundColor.a };
