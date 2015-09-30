@@ -3,6 +3,7 @@
 
 MovingEntity::MovingEntity(int id) : BaseGameEntity(id)
 {
+	
 }
 
 
