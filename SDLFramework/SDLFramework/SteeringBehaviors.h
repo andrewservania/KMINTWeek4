@@ -224,27 +224,27 @@ private:
   Vector2D FollowPath();
 
   //this results in a steering force that attempts to steer the vehicle
-  //to the center of the vector connecting two moving agents.
-  Vector2D Interpose(const Vehicle* VehicleA, const Vehicle* VehicleB);
+  ////to the center of the vector connecting two moving agents.
+  //Vector2D Interpose(const Vehicle* VehicleA, const Vehicle* VehicleB);
 
-  //given another agent position to hide from and a list of BaseGameEntitys this
-  //method attempts to put an obstacle between itself and its opponent
-  Vector2D Hide(const Vehicle* hunter, const std::vector<BaseGameEntity*>& obstacles);
+  ////given another agent position to hide from and a list of BaseGameEntitys this
+  ////method attempts to put an obstacle between itself and its opponent
+  //Vector2D Hide(const Vehicle* hunter, const std::vector<BaseGameEntity*>& obstacles);
 
 
-  // -- Group Behaviors -- //
+  //// -- Group Behaviors -- //
 
-  Vector2D Cohesion(const std::vector<Vehicle*> &agents);
-  
-  Vector2D Separation(const std::vector<Vehicle*> &agents);
+  //Vector2D Cohesion(const std::vector<Vehicle*> &agents);
+  //
+  //Vector2D Separation(const std::vector<Vehicle*> &agents);
 
-  Vector2D Alignment(const std::vector<Vehicle*> &agents);
+  //Vector2D Alignment(const std::vector<Vehicle*> &agents);
 
-  //the following three are the same as above but they use cell-space
-  //partitioning to find the neighbors
-  Vector2D CohesionPlus(const std::vector<Vehicle*> &agents);
-  Vector2D SeparationPlus(const std::vector<Vehicle*> &agents);
-  Vector2D AlignmentPlus(const std::vector<Vehicle*> &agents);
+  ////the following three are the same as above but they use cell-space
+  ////partitioning to find the neighbors
+  //Vector2D CohesionPlus(const std::vector<Vehicle*> &agents);
+  //Vector2D SeparationPlus(const std::vector<Vehicle*> &agents);
+  //Vector2D AlignmentPlus(const std::vector<Vehicle*> &agents);
 
     /* .......................................................
 
@@ -288,7 +288,7 @@ public:
 
   //renders visual aids and info for seeing how each behavior is
   //calculated
-  void      RenderAids();
+  //void      RenderAids();
 
   void      SetTarget(const Vector2D t){m_vTarget = t;}
 
@@ -304,8 +304,8 @@ public:
 
   Vector2D Force()const{return m_vSteeringForce;}
 
-  void      ToggleSpacePartitioningOnOff(){m_bCellSpaceOn = !m_bCellSpaceOn;}
-  bool      isSpacePartitioningOn()const{return m_bCellSpaceOn;}
+  //void      ToggleSpacePartitioningOnOff(){m_bCellSpaceOn = !m_bCellSpaceOn;}
+  //bool      isSpacePartitioningOn()const{return m_bCellSpaceOn;}
 
   void      SetSummingMethod(summing_method sm){m_SummingMethod = sm;}
 
@@ -316,16 +316,16 @@ public:
   void WanderOn(){m_iFlags |= wander;}
   void PursuitOn(Vehicle* v){m_iFlags |= pursuit; m_pTargetAgent1 = v;}
   void EvadeOn(Vehicle* v){m_iFlags |= evade; m_pTargetAgent1 = v;}
-  void CohesionOn(){m_iFlags |= cohesion;}
-  void SeparationOn(){m_iFlags |= separation;}
-  void AlignmentOn(){m_iFlags |= allignment;}
-  void ObstacleAvoidanceOn(){m_iFlags |= obstacle_avoidance;}
-  void WallAvoidanceOn(){m_iFlags |= wall_avoidance;}
+  //void CohesionOn(){m_iFlags |= cohesion;}
+  //void SeparationOn(){m_iFlags |= separation;}
+  //void AlignmentOn(){m_iFlags |= allignment;}
+  //void ObstacleAvoidanceOn(){m_iFlags |= obstacle_avoidance;}
+  //void WallAvoidanceOn(){m_iFlags |= wall_avoidance;}
   void FollowPathOn(){m_iFlags |= follow_path;}
   void InterposeOn(Vehicle* v1, Vehicle* v2){m_iFlags |= interpose; m_pTargetAgent1 = v1; m_pTargetAgent2 = v2;}
-  void HideOn(Vehicle* v){m_iFlags |= hide; m_pTargetAgent1 = v;}
+ // void HideOn(Vehicle* v){m_iFlags |= hide; m_pTargetAgent1 = v;}
   void OffsetPursuitOn(Vehicle* v1, const Vector2D offset){m_iFlags |= offset_pursuit; m_vOffset = offset; m_pTargetAgent1 = v1;}  
-  void FlockingOn(){CohesionOn(); AlignmentOn(); SeparationOn(); WanderOn();}
+  //void FlockingOn(){CohesionOn(); AlignmentOn(); SeparationOn(); WanderOn();}
 
   void FleeOff()  {if(On(flee))   m_iFlags ^=flee;}
   void SeekOff()  {if(On(seek))   m_iFlags ^=seek;}
@@ -333,16 +333,16 @@ public:
   void WanderOff(){if(On(wander)) m_iFlags ^=wander;}
   void PursuitOff(){if(On(pursuit)) m_iFlags ^=pursuit;}
   void EvadeOff(){if(On(evade)) m_iFlags ^=evade;}
-  void CohesionOff(){if(On(cohesion)) m_iFlags ^=cohesion;}
-  void SeparationOff(){if(On(separation)) m_iFlags ^=separation;}
-  void AlignmentOff(){if(On(allignment)) m_iFlags ^=allignment;}
-  void ObstacleAvoidanceOff(){if(On(obstacle_avoidance)) m_iFlags ^=obstacle_avoidance;}
-  void WallAvoidanceOff(){if(On(wall_avoidance)) m_iFlags ^=wall_avoidance;}
+  //void CohesionOff(){if(On(cohesion)) m_iFlags ^=cohesion;}
+  //void SeparationOff(){if(On(separation)) m_iFlags ^=separation;}
+  //void AlignmentOff(){if(On(allignment)) m_iFlags ^=allignment;}
+  //void ObstacleAvoidanceOff(){if(On(obstacle_avoidance)) m_iFlags ^=obstacle_avoidance;}
+  //void WallAvoidanceOff(){if(On(wall_avoidance)) m_iFlags ^=wall_avoidance;}
   void FollowPathOff(){if(On(follow_path)) m_iFlags ^=follow_path;}
-  void InterposeOff(){if(On(interpose)) m_iFlags ^=interpose;}
-  void HideOff(){if(On(hide)) m_iFlags ^=hide;}
+  //void InterposeOff(){if(On(interpose)) m_iFlags ^=interpose;}
+  //void HideOff(){if(On(hide)) m_iFlags ^=hide;}
   void OffsetPursuitOff(){if(On(offset_pursuit)) m_iFlags ^=offset_pursuit;}
-  void FlockingOff(){CohesionOff(); AlignmentOff(); SeparationOff(); WanderOff();}
+  //void FlockingOff(){CohesionOff(); AlignmentOff(); SeparationOff(); WanderOff();}
 
   bool isFleeOn(){return On(flee);}
   bool isSeekOn(){return On(seek);}
@@ -350,14 +350,14 @@ public:
   bool isWanderOn(){return On(wander);}
   bool isPursuitOn(){return On(pursuit);}
   bool isEvadeOn(){return On(evade);}
-  bool isCohesionOn(){return On(cohesion);}
-  bool isSeparationOn(){return On(separation);}
-  bool isAlignmentOn(){return On(allignment);}
-  bool isObstacleAvoidanceOn(){return On(obstacle_avoidance);}
-  bool isWallAvoidanceOn(){return On(wall_avoidance);}
-  bool isFollowPathOn(){return On(follow_path);}
-  bool isInterposeOn(){return On(interpose);}
-  bool isHideOn(){return On(hide);}
+  //bool isCohesionOn(){return On(cohesion);}
+  //bool isSeparationOn(){return On(separation);}
+  //bool isAlignmentOn(){return On(allignment);}
+  //bool isObstacleAvoidanceOn(){return On(obstacle_avoidance);}
+  //bool isWallAvoidanceOn(){return On(wall_avoidance);}
+  //bool isFollowPathOn(){return On(follow_path);}
+  //bool isInterposeOn(){return On(interpose);}
+//  bool isHideOn(){return On(hide);}
   bool isOffsetPursuitOn(){return On(offset_pursuit);}
 
   double DBoxLength()const{return m_dDBoxLength;}
@@ -367,9 +367,9 @@ public:
   double WanderDistance()const{return m_dWanderDistance;}
   double WanderRadius()const{return m_dWanderRadius;}
 
-  double SeparationWeight()const{return m_dWeightSeparation;}
-  double AlignmentWeight()const{return m_dWeightAlignment;}
-  double CohesionWeight()const{return m_dWeightCohesion;}
+  //double SeparationWeight()const{return m_dWeightSeparation;}
+  //double AlignmentWeight()const{return m_dWeightAlignment;}
+  //double CohesionWeight()const{return m_dWeightCohesion;}
 
 };
 

@@ -1,7 +1,7 @@
 #include "Rabbit.h"
 #include "Graph.h"
 #include "RabbitWanderingState.h"
-Rabbit::Rabbit(int id) : BaseGameEntity(id)
+Rabbit::Rabbit(int id) : BaseGameEntity(id, 10, Vector2D(0,0),0.0)
 {
 	mTexture = mApplication->LoadTexture("rabbit-3.png");
 	pickedUpPill = false;

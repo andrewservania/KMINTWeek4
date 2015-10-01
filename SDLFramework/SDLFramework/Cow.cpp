@@ -8,7 +8,7 @@
 
 using namespace std;
 
-Cow::Cow(int id) : BaseGameEntity(id)
+Cow::Cow(int id) : BaseGameEntity(id, 10, Vector2D(0, 0), 0.0)
 {
 	mTexture = mApplication->LoadTexture("cow-1.png");
 	mApplication->AddRenderable(this);
