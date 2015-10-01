@@ -46,6 +46,8 @@ public:
 
 	~Vehicle();
 	void Update(float deltaTime) override;
+	void Draw();
+	
 	SteeringBehavior* Steering() const { return steering; }
 
 	Vector2D SmoothingHeading() const { return smoothedHeading; }

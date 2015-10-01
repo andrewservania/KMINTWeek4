@@ -10,7 +10,7 @@
 #include "CellSpacePartition.h"
 #include "Stream_Utility_Functions.h"
 #include "EntityFunctionTemplates.h"
-
+#include "Parameters.h"
 #include <cassert>
 
 
@@ -26,15 +26,15 @@ SteeringBehavior::SteeringBehavior(Vehicle* agent):
              
              m_pVehicle(agent),
              m_iFlags(0),
-             m_dDBoxLength(Prm.MinDetectionBoxLength),
-             m_dWeightCohesion(Prm.CohesionWeight),
-             m_dWeightAlignment(Prm.AlignmentWeight),
-             m_dWeightSeparation(Prm.SeparationWeight),
-             m_dWeightObstacleAvoidance(Prm.ObstacleAvoidanceWeight),
-             m_dWeightWander(Prm.WanderWeight),
-             m_dWeightWallAvoidance(Prm.WallAvoidanceWeight),
-             m_dViewDistance(Prm.ViewDistance),
-             m_dWallDetectionFeelerLength(Prm.WallDetectionFeelerLength),
+             m_dDBoxLength(Parameters::Instance()->MinDetectionBoxLength),
+             m_dWeightCohesion(Parameters::Instance()->CohesionWeight),
+             m_dWeightAlignment(Parameters::Instance()->AlignmentWeight),
+             m_dWeightSeparation(Parameters::Instance()->SeparationWeight),
+             m_dWeightObstacleAvoidance(Parameters::Instance()->ObstacleAvoidanceWeight),
+             m_dWeightWander(Parameters::Instance()->WanderWeight),
+             m_dWeightWallAvoidance(Parameters::Instance()->WallAvoidanceWeight),
+             m_dViewDistance(Parameters::Instance()->ViewDistance),
+             m_dWallDetectionFeelerLength(Parameters::Instance()->WallDetectionFeelerLength),
              m_Feelers(3),
              m_Deceleration(normal),
              m_pTargetAgent1(NULL),
@@ -43,15 +43,15 @@ SteeringBehavior::SteeringBehavior(Vehicle* agent):
              m_dWanderJitter(WanderJitterPerSec),
              m_dWanderRadius(WanderRad),
              m_dWaypointSeekDistSq(WaypointSeekDist*WaypointSeekDist),
-             m_dWeightSeek(Prm.SeekWeight),
-             m_dWeightFlee(Prm.FleeWeight),
-             m_dWeightArrive(Prm.ArriveWeight),
-             m_dWeightPursuit(Prm.PursuitWeight),
-             m_dWeightOffsetPursuit(Prm.OffsetPursuitWeight),
-             m_dWeightInterpose(Prm.InterposeWeight),
-             m_dWeightHide(Prm.HideWeight),
-             m_dWeightEvade(Prm.EvadeWeight),
-             m_dWeightFollowPath(Prm.FollowPathWeight),
+             m_dWeightSeek(Parameters::Instance()->SeekWeight),
+             m_dWeightFlee(Parameters::Instance()->FleeWeight),
+             m_dWeightArrive(Parameters::Instance()->ArriveWeight),
+             m_dWeightPursuit(Parameters::Instance()->PursuitWeight),
+             m_dWeightOffsetPursuit(Parameters::Instance()->OffsetPursuitWeight),
+             m_dWeightInterpose(Parameters::Instance()->InterposeWeight),
+             m_dWeightHide(Parameters::Instance()->HideWeight),
+             m_dWeightEvade(Parameters::Instance()->EvadeWeight),
+             m_dWeightFollowPath(Parameters::Instance()->FollowPathWeight),
              m_bCellSpaceOn(false),
              m_SummingMethod(prioritized)
 
@@ -499,10 +499,10 @@ Vector2D SteeringBehavior::CalculateDithered()
   //reset the steering force
    m_vSteeringForce.Zero();
 
-  //if (On(wall_avoidance) && RandFloat() < Prm.prWallAvoidance)
+  //if (On(wall_avoidance) && RandFloat() < Parameters::Instance()->prWallAvoidance)
   //{
   //  m_vSteeringForce = WallAvoidance(m_pVehicle->World()->Walls()) *
-  //                       m_dWeightWallAvoidance / Prm.prWallAvoidance;
+  //                       m_dWeightWallAvoidance / Parameters::Instance()->prWallAvoidance;
 
   //  if (!m_vSteeringForce.isZero())
   //  {
@@ -512,10 +512,10 @@ Vector2D SteeringBehavior::CalculateDithered()
   //  }
   //}
    
-  //if (On(obstacle_avoidance) && RandFloat() < Prm.prObstacleAvoidance)
+  //if (On(obstacle_avoidance) && RandFloat() < Parameters::Instance()->prObstacleAvoidance)
   //{
   //  m_vSteeringForce += ObstacleAvoidance(m_pVehicle->World()->Obstacles()) * 
-  //          m_dWeightObstacleAvoidance / Prm.prObstacleAvoidance;
+  //          m_dWeightObstacleAvoidance / Parameters::Instance()->prObstacleAvoidance;
 
   //  if (!m_vSteeringForce.isZero())
   //  {
@@ -527,10 +527,10 @@ Vector2D SteeringBehavior::CalculateDithered()
 
   //if (!isSpacePartitioningOn())
   //{
-  //  if (On(separation) && RandFloat() < Prm.prSeparation)
+  //  if (On(separation) && RandFloat() < Parameters::Instance()->prSeparation)
   //  {
   //    m_vSteeringForce += Separation(m_pVehicle->World()->Agents()) * 
-  //                        m_dWeightSeparation / Prm.prSeparation;
+  //                        m_dWeightSeparation / Parameters::Instance()->prSeparation;
 
   //    if (!m_vSteeringForce.isZero())
   //    {
@@ -543,10 +543,10 @@ Vector2D SteeringBehavior::CalculateDithered()
 
   //else
   //{
-  //  if (On(separation) && RandFloat() < Prm.prSeparation)
+  //  if (On(separation) && RandFloat() < Parameters::Instance()->prSeparation)
   //  {
   //    m_vSteeringForce += SeparationPlus(m_pVehicle->World()->Agents()) * 
-  //                        m_dWeightSeparation / Prm.prSeparation;
+  //                        m_dWeightSeparation / Parameters::Instance()->prSeparation;
 
   //    if (!m_vSteeringForce.isZero())
   //    {
@@ -558,9 +558,9 @@ Vector2D SteeringBehavior::CalculateDithered()
   //}
 
 
-  //if (On(flee) && RandFloat() < Prm.prFlee)
+  //if (On(flee) && RandFloat() < Parameters::Instance()->prFlee)
   //{
-  //  m_vSteeringForce += Flee(m_pVehicle->World()->Crosshair()) * m_dWeightFlee / Prm.prFlee;
+  //  m_vSteeringForce += Flee(m_pVehicle->World()->Crosshair()) * m_dWeightFlee / Parameters::Instance()->prFlee;
 
   //  if (!m_vSteeringForce.isZero())
   //  {
@@ -570,11 +570,11 @@ Vector2D SteeringBehavior::CalculateDithered()
   //  }
   //}
 
-  if (On(evade) && RandFloat() < Prm.prEvade)
+  if (On(evade) && RandFloat() < Parameters::Instance()->prEvade)
   {
     assert(m_pTargetAgent1 && "Evade target not assigned");
     
-    m_vSteeringForce += Evade(m_pTargetAgent1) * m_dWeightEvade / Prm.prEvade;
+    m_vSteeringForce += Evade(m_pTargetAgent1) * m_dWeightEvade / Parameters::Instance()->prEvade;
 
     if (!m_vSteeringForce.isZero())
     {
@@ -587,10 +587,10 @@ Vector2D SteeringBehavior::CalculateDithered()
 
   //if (!isSpacePartitioningOn())
   //{
-  //  if (On(allignment) && RandFloat() < Prm.prAlignment)
+  //  if (On(allignment) && RandFloat() < Parameters::Instance()->prAlignment)
   //  {
   //    m_vSteeringForce += Alignment(m_pVehicle->World()->Agents()) *
-  //                        m_dWeightAlignment / Prm.prAlignment;
+  //                        m_dWeightAlignment / Parameters::Instance()->prAlignment;
 
   //    if (!m_vSteeringForce.isZero())
   //    {
@@ -600,10 +600,10 @@ Vector2D SteeringBehavior::CalculateDithered()
   //    }
   //  }
 
-  //  if (On(cohesion) && RandFloat() < Prm.prCohesion)
+  //  if (On(cohesion) && RandFloat() < Parameters::Instance()->prCohesion)
   //  {
   //    m_vSteeringForce += Cohesion(m_pVehicle->World()->Agents()) * 
-  //                        m_dWeightCohesion / Prm.prCohesion;
+  //                        m_dWeightCohesion / Parameters::Instance()->prCohesion;
 
   //    if (!m_vSteeringForce.isZero())
   //    {
@@ -615,10 +615,10 @@ Vector2D SteeringBehavior::CalculateDithered()
   //}
   //else
   //{
-  //  if (On(allignment) && RandFloat() < Prm.prAlignment)
+  //  if (On(allignment) && RandFloat() < Parameters::Instance()->prAlignment)
   //  {
   //    m_vSteeringForce += AlignmentPlus(m_pVehicle->World()->Agents()) *
-  //                        m_dWeightAlignment / Prm.prAlignment;
+  //                        m_dWeightAlignment / Parameters::Instance()->prAlignment;
 
   //    if (!m_vSteeringForce.isZero())
   //    {
@@ -628,10 +628,10 @@ Vector2D SteeringBehavior::CalculateDithered()
   //    }
   //  }
 
-  //  if (On(cohesion) && RandFloat() < Prm.prCohesion)
+  //  if (On(cohesion) && RandFloat() < Parameters::Instance()->prCohesion)
   //  {
   //    m_vSteeringForce += CohesionPlus(m_pVehicle->World()->Agents()) *
-  //                        m_dWeightCohesion / Prm.prCohesion;
+  //                        m_dWeightCohesion / Parameters::Instance()->prCohesion;
 
   //    if (!m_vSteeringForce.isZero())
   //    {
@@ -642,9 +642,9 @@ Vector2D SteeringBehavior::CalculateDithered()
   //  }
   //}
 
-  if (On(wander) && RandFloat() < Prm.prWander)
+  if (On(wander) && RandFloat() < Parameters::Instance()->prWander)
   {
-    m_vSteeringForce += Wander() * m_dWeightWander / Prm.prWander;
+    m_vSteeringForce += Wander() * m_dWeightWander / Parameters::Instance()->prWander;
 
     if (!m_vSteeringForce.isZero())
     {
@@ -654,9 +654,9 @@ Vector2D SteeringBehavior::CalculateDithered()
     }
   }
 
-  //if (On(seek) && RandFloat() < Prm.prSeek)
+  //if (On(seek) && RandFloat() < Parameters::Instance()->prSeek)
   //{
-  //  m_vSteeringForce += Seek(m_pVehicle->World()->Crosshair()) * m_dWeightSeek / Prm.prSeek;
+  //  m_vSteeringForce += Seek(m_pVehicle->World()->Crosshair()) * m_dWeightSeek / Parameters::Instance()->prSeek;
 
   //  if (!m_vSteeringForce.isZero())
   //  {
@@ -666,10 +666,10 @@ Vector2D SteeringBehavior::CalculateDithered()
   //  }
   //}
 
-  //if (On(arrive) && RandFloat() < Prm.prArrive)
+  //if (On(arrive) && RandFloat() < Parameters::Instance()->prArrive)
   //{
   //  m_vSteeringForce += Arrive(m_pVehicle->World()->Crosshair(), m_Deceleration) * 
-  //                      m_dWeightArrive / Prm.prArrive;
+  //                      m_dWeightArrive / Parameters::Instance()->prArrive;
 
   //  if (!m_vSteeringForce.isZero())
   //  {
@@ -859,9 +859,9 @@ Vector2D SteeringBehavior::Wander()
 //Vector2D SteeringBehavior::ObstacleAvoidance(const std::vector<BaseGameEntity*>& obstacles)
 //{
 //  //the detection box length is proportional to the agent's velocity
-//  m_dDBoxLength = Prm.MinDetectionBoxLength + 
+//  m_dDBoxLength = Parameters::Instance()->MinDetectionBoxLength + 
 //                  (m_pVehicle->Speed()/m_pVehicle->MaxSpeed()) *
-//                  Prm.MinDetectionBoxLength;
+//                  Parameters::Instance()->MinDetectionBoxLength;
 //
 //  //tag all obstacles within range of the box for processing
 //  m_pVehicle->World()->TagObstaclesWithinViewRange(m_pVehicle, m_dDBoxLength);

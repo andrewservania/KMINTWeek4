@@ -116,6 +116,9 @@
     <ClCompile Include="Path.cpp">
       <Filter>Source Files\Mat Buckland</Filter>
     </ClCompile>
+    <ClCompile Include="Parameters.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="SDL2.dll" />
@@ -252,6 +255,9 @@
     </ClInclude>
     <ClInclude Include="Smoother.h">
       <Filter>Header Files\Mat Buckland</Filter>
+    </ClInclude>
+    <ClInclude Include="Parameters.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

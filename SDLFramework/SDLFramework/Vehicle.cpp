@@ -6,7 +6,7 @@
 //#include "GameWorld.h"
 //#include "CellSpacePartition.h"
 //#include "cgdi.h"
-
+#include "Parameters.h"
 Vehicle::Vehicle(int id,
 	Vector2D _position,
 	double _rotation,
@@ -22,25 +22,25 @@ Vehicle::Vehicle(int id,
 						_velocity,
 						_max_speed,
 						Vector2D(sin(_rotation), -cos(_rotation)),
-						mass,
+						_mass,
 						Vector2D(_scale, _scale),
 						_max_turn_rate,
 						_max_force),
-
+						
 	smoothedHeading(Vector2D(0,0)),
 	smoothingOn(false),
 	timeElapsed(0.0)
 {
 	mTexture = mApplication->LoadTexture("cow-1.png");
 
-	mX = 300;
-	mY = 250;
+	mX = static_cast<uint32_t>(position.x);
+	mY = static_cast<uint32_t>(position.y);
 
 	// set up the steering behavior class
 	steering = new SteeringBehavior(this);
 
 	//set up the smoother
-	headingSmoother = new Smoother<Vector2D>(Prm.NumSamplesForSmoothing, Vector2D(0.0, 0.0));
+	headingSmoother = new Smoother<Vector2D>(Parameters::Instance()->NumSamplesForSmoothing, Vector2D(0.0, 0.0));
 
 	mApplication->AddRenderable(this);
 }
@@ -86,4 +86,9 @@ void Vehicle::Update(float deltaTime)
 	//treat the screen as a toroid. Current window resolution is 1300x700
 	WrapAround(position, 1300, 700);
 
+}
+
+void Vehicle::Draw()
+{
+	mApplication->DrawTexture(mTexture, mX, mY, 100, 100);
 }
