@@ -3,11 +3,12 @@
 #include "Cow.h"
 #include "Rabbit.h"
 #include "Vehicle.h"
+#include "CellSpacePartition.h"
 
 class Arena : public IGameObject
 {
 private:
-
+	
 public:
 	 static Cow*cow;
 	 static Rabbit*rabbit;

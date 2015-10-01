@@ -11,9 +11,11 @@ Arena::Arena()
 	cow = new Cow(1);
 	rabbit = new Rabbit(2);
 	mApplication->AddRenderable(this);
+	
 
 	Vector2D spawnPosition1 = Vector2D(300.0, 320.0);
 	Vector2D spawnPosition2 = Vector2D(1200.0, 320.0);
+
 
 	predator = new Vehicle(3,
 		spawnPosition1,										//initial position
@@ -29,30 +31,38 @@ Arena::Arena()
 	prey = new Vehicle(4,
 		spawnPosition2,										//initial position
 		RandFloat()*TwoPi,									//start rotation
-		Vector2D(0, 0),										//velocity
+		Vector2D(200,100),										//velocity
 		Parameters::Instance()->VehicleMass,				//mass
 		(Parameters::Instance()->SteeringForce *
-		Parameters::Instance()->SteeringForceTweaker)*2,	//max force
-		Parameters::Instance()->MaxSpeed,					//max velocity
+		Parameters::Instance()->SteeringForceTweaker) *2,	//max force
+		Parameters::Instance()->MaxSpeed *100,					//max velocity
 		Parameters::Instance()->MaxTurnRate,				//max turn rate
 		Parameters::Instance()->VehicleScale);				//scale
 
-	predator->Steering()->PursuitOn(prey);
+	//predator->Steering()->PursuitOn(prey);
 	predator->SetScale(Vector2D(30, 30));
+	//predator->Steering()->CreateRandomPath(3, 100, 200, 300, 400);
+	//predator->Steering()->FollowPathOn();
+	predator->Steering()->PursuitOn(prey);
 	
-	prey->Steering()->EvadeOn(predator);
+	//prey->Steering()->FleeOn();
+	//prey->Steering()->WanderOn();
+	
+	
 	prey->SetScale(Vector2D(10, 10));
-
-
+	prey->Steering()->EvadeOn(predator);
+	//prey->SetMaxSpeed(70);
+	//prey->Steering()->ArriveOn();
 
 }
 
 
 Arena::~Arena()
 {
+
 }
 
 void Arena::Update(float deltaTime)
 {
-
+	
 }
