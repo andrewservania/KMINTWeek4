@@ -19,8 +19,7 @@ int main(int args[])
 	}
 
 	application->SetTargetFPS(60);
-
-	auto arena = new Arena();
+	Arena::Instance();
 	auto dashboard = new Dashboard();										// To show some statistics such as shortestPath, Cow state and rabbit state
 
 	while (application->IsRunning())

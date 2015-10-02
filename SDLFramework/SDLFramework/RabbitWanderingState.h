@@ -6,7 +6,9 @@ class RabbitWanderingState :
 	public State<Rabbit>
 {
 private:
-
+	bool hasStarted;
+	void Start(Rabbit* rabbit);
+	bool IsThreatEminent(Rabbit* rabbit);
 public:
 	RabbitWanderingState();
 	~RabbitWanderingState();

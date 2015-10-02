@@ -69,7 +69,7 @@ Dashboard::~Dashboard()
 void Dashboard::Update()
 {
 	// Application information
-	FWApplication::GetInstance()->DrawTextOnScreen(applicationInformation, 300, 50);
+	FWApplication::GetInstance()->DrawTextOnScreen(applicationInformation, 650, 50);
 
 	// KMINT Week 3 Description
 	FWApplication::GetInstance()->DrawTextOnScreen(comment1, 300, 100);
@@ -88,12 +88,14 @@ void Dashboard::Update()
 
 	// Cow state label
 	CowStateLabel(Arena::cow->GetCurrentState());
-	FWApplication::GetInstance()->DrawTextOnScreen(cowStateLabel, 300, 420);
+	FWApplication::GetInstance()->DrawTextOnScreen(cowStateLabel, 650, 90);
+	//FWApplication::GetInstance()->DrawTextOnScreen("NEEDS FIX IN DASHBOARD CLASS", 300, 420);
 
 
 	// Rabbit state label
 	RabbitStateLabel(Arena::rabbit->GetCurrentState());
-	FWApplication::GetInstance()->DrawTextOnScreen(rabbitStateLabel, 300, 460);
+	FWApplication::GetInstance()->DrawTextOnScreen(rabbitStateLabel, 650, 110);
+	//FWApplication::GetInstance()->DrawTextOnScreen("NEEDS FIX IN DASHBOARD CLASS", 300, 460);
 
 	// Shortest path label
 	FWApplication::GetInstance()->DrawTextOnScreen(shortestPathLabel, 300, 500);

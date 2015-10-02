@@ -7,8 +7,7 @@
 class Vehicle :
 	public MovingEntity
 {
-private:
-
+protected:
 	//the steering behavior class
 	SteeringBehavior* steering;
 
@@ -30,7 +29,6 @@ private:
 	//buffer for the vehicle shape
 	//std::vector<Vector2D> vehicleVB;
 
-	//fills the buffer with vertex data
 
 
 public:
@@ -45,19 +43,16 @@ public:
 		double _scale);
 
 	~Vehicle();
-	void Update(float deltaTime) override;
-	void Draw();
+	virtual void Update(float deltaTime)=0;
+	//virtual void Draw()=0;
 	
+	//// Accessor methods
 	SteeringBehavior* Steering() const { return steering; }
-
 	Vector2D SmoothingHeading() const { return smoothedHeading; }
-
-	// Accessor methods
 	bool isSmoothingOn() const {return smoothingOn;}
 	bool SmoothingOn() { smoothingOn = true; }
 	bool SmoothingOff() { smoothingOn = false;  }
 	bool ToggleSmoothing() { return !smoothingOn; }
-
 	double TimeElapsed() const { return timeElapsed; }
 	
 };
