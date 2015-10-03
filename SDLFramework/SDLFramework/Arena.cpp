@@ -14,8 +14,8 @@ Arena::Arena()
 	mApplication->AddRenderable(this);
 	
 
-	Vector2D spawnPosition1 = Vector2D(300.0, 320.0);
-	Vector2D spawnPosition2 = Vector2D(1200.0, 320.0);
+	Vector2D spawnPosition1 = Vector2D(rand() % 1300,rand() % 700);
+	Vector2D spawnPosition2 = Vector2D(rand() % 1300,rand() % 700);
 
 
 	cow = new Cow(1,
