@@ -5,6 +5,7 @@
 #include "utils.h"
 #include "Cgdi.h"
 //#include "GameWorld.h"
+#include "Arena.h"
 #include "geometry.h"
 #include "BaseGameEntity.h"
 #include "CellSpacePartition.h"
@@ -236,61 +237,61 @@ Vector2D SteeringBehavior::CalculatePrioritized()
  
   //these next three can be combined for flocking behavior (wander is
   //also a good behavior to add into this mix)
-  //if (!isSpacePartitioningOn())
-  //{
-  //  if (On(separation))
-  //  {
-  //    force = Separation(m_pVehicle->World()->Agents()) * m_dWeightSeparation;
-
-  //    if (!AccumulateForce(m_vSteeringForce, force)) return m_vSteeringForce;
-  //  }
-
-  //  if (On(allignment))
-  //  {
-  //    force = Alignment(m_pVehicle->World()->Agents()) * m_dWeightAlignment;
-
-  //    if (!AccumulateForce(m_vSteeringForce, force)) return m_vSteeringForce;
-  //  }
-
-  //  if (On(cohesion))
-  //  {
-  //    force = Cohesion(m_pVehicle->World()->Agents()) * m_dWeightCohesion;
-
-  //    if (!AccumulateForce(m_vSteeringForce, force)) return m_vSteeringForce;
-  //  }
-  //}
-
-  //else
-  //{
-
-  //  if (On(separation))
-  //  {
-  //    force = SeparationPlus(m_pVehicle->World()->Agents()) * m_dWeightSeparation;
-
-  //    if (!AccumulateForce(m_vSteeringForce, force)) return m_vSteeringForce;
-  //  }
-
-  //  if (On(allignment))
-  //  {
-  //    force = AlignmentPlus(m_pVehicle->World()->Agents()) * m_dWeightAlignment;
-
-  //    if (!AccumulateForce(m_vSteeringForce, force)) return m_vSteeringForce;
-  //  }
-
-  //  if (On(cohesion))
-  //  {
-  //    force = CohesionPlus(m_pVehicle->World()->Agents()) * m_dWeightCohesion;
-
-  //    if (!AccumulateForce(m_vSteeringForce, force)) return m_vSteeringForce;
-  //  }
-  //}
-
-  if (On(seek))
+  if (!isSpacePartitioningOn())
   {
-   // force = Seek(m_pVehicle->World()->Crosshair()) * m_dWeightSeek;
+    if (On(separation))
+    {
+		force = Separation(Arena::Agents()) * m_dWeightSeparation;
 
-    if (!AccumulateForce(m_vSteeringForce, force)) return m_vSteeringForce;
+      if (!AccumulateForce(m_vSteeringForce, force)) return m_vSteeringForce;
+    }
+
+    if (On(allignment))
+    {
+      force = Alignment(Arena::Agents()) * m_dWeightAlignment;
+
+      if (!AccumulateForce(m_vSteeringForce, force)) return m_vSteeringForce;
+    }
+
+    if (On(cohesion))
+    {
+      force = Cohesion(Arena::Agents()) * m_dWeightCohesion;
+
+      if (!AccumulateForce(m_vSteeringForce, force)) return m_vSteeringForce;
+    }
   }
+
+  else
+  {
+
+    if (On(separation))
+    {
+      force = SeparationPlus(Arena::Agents()) * m_dWeightSeparation;
+
+      if (!AccumulateForce(m_vSteeringForce, force)) return m_vSteeringForce;
+    }
+
+    if (On(allignment))
+    {
+      force = AlignmentPlus(Arena::Agents()) * m_dWeightAlignment;
+
+      if (!AccumulateForce(m_vSteeringForce, force)) return m_vSteeringForce;
+    }
+
+    if (On(cohesion))
+    {
+      force = CohesionPlus(Arena::Agents()) * m_dWeightCohesion;
+
+      if (!AccumulateForce(m_vSteeringForce, force)) return m_vSteeringForce;
+    }
+  }
+
+  //if (On(seek))
+  //{
+  // // force = Seek(m_pVehicle->World()->Crosshair()) * m_dWeightSeek;
+
+  //  if (!AccumulateForce(m_vSteeringForce, force)) return m_vSteeringForce;
+  //}
 
 
   //if (On(arrive))
@@ -386,40 +387,40 @@ Vector2D SteeringBehavior::CalculateWeightedSum()
 
   //these next three can be combined for flocking behavior (wander is
   //also a good behavior to add into this mix)
- /* if (!isSpacePartitioningOn())
+ if (!isSpacePartitioningOn())
   {
     if (On(separation))
     {
-      m_vSteeringForce += Separation(m_pVehicle->World()->Agents()) * m_dWeightSeparation;
+      m_vSteeringForce += Separation(Arena::Agents()) * m_dWeightSeparation;
     }
 
     if (On(allignment))
     {
-      m_vSteeringForce += Alignment(m_pVehicle->World()->Agents()) * m_dWeightAlignment;
+      m_vSteeringForce += Alignment(Arena::Agents()) * m_dWeightAlignment;
     }
 
     if (On(cohesion))
     {
-      m_vSteeringForce += Cohesion(m_pVehicle->World()->Agents()) * m_dWeightCohesion;
+      m_vSteeringForce += Cohesion(Arena::Agents()) * m_dWeightCohesion;
     }
   }
   else
   {
     if (On(separation))
     {
-      m_vSteeringForce += SeparationPlus(m_pVehicle->World()->Agents()) * m_dWeightSeparation;
+      m_vSteeringForce += SeparationPlus(Arena::Agents()) * m_dWeightSeparation;
     }
 
     if (On(allignment))
     {
-      m_vSteeringForce += AlignmentPlus(m_pVehicle->World()->Agents()) * m_dWeightAlignment;
+      m_vSteeringForce += AlignmentPlus(Arena::Agents()) * m_dWeightAlignment;
     }
 
     if (On(cohesion))
     {
-      m_vSteeringForce += CohesionPlus(m_pVehicle->World()->Agents()) * m_dWeightCohesion;
+      m_vSteeringForce += CohesionPlus(Arena::Agents()) * m_dWeightCohesion;
     }
-  }*/
+  }
 
 
   if (On(wander))
@@ -525,37 +526,37 @@ Vector2D SteeringBehavior::CalculateDithered()
   //  }
   //}
 
-  //if (!isSpacePartitioningOn())
-  //{
-  //  if (On(separation) && RandFloat() < Parameters::Instance()->prSeparation)
-  //  {
-  //    m_vSteeringForce += Separation(m_pVehicle->World()->Agents()) * 
-  //                        m_dWeightSeparation / Parameters::Instance()->prSeparation;
+  if (!isSpacePartitioningOn())
+  {
+    if (On(separation) && RandFloat() < Parameters::Instance()->prSeparation)
+    {
+      m_vSteeringForce += Separation(Arena::Agents()) * 
+                          m_dWeightSeparation / Parameters::Instance()->prSeparation;
 
-  //    if (!m_vSteeringForce.isZero())
-  //    {
-  //      m_vSteeringForce.Truncate(m_pVehicle->MaxForce()); 
-  //    
-  //      return m_vSteeringForce;
-  //    }
-  //  }
-  //}
+      if (!m_vSteeringForce.isZero())
+      {
+        m_vSteeringForce.Truncate(m_pVehicle->MaxForce()); 
+      
+        return m_vSteeringForce;
+      }
+    }
+  }
 
-  //else
-  //{
-  //  if (On(separation) && RandFloat() < Parameters::Instance()->prSeparation)
-  //  {
-  //    m_vSteeringForce += SeparationPlus(m_pVehicle->World()->Agents()) * 
-  //                        m_dWeightSeparation / Parameters::Instance()->prSeparation;
+  else
+  {
+    if (On(separation) && RandFloat() < Parameters::Instance()->prSeparation)
+    {
+      m_vSteeringForce += SeparationPlus(Arena::Agents()) * 
+                          m_dWeightSeparation / Parameters::Instance()->prSeparation;
 
-  //    if (!m_vSteeringForce.isZero())
-  //    {
-  //      m_vSteeringForce.Truncate(m_pVehicle->MaxForce()); 
-  //    
-  //      return m_vSteeringForce;
-  //    }
-  //  }
-  //}
+      if (!m_vSteeringForce.isZero())
+      {
+        m_vSteeringForce.Truncate(m_pVehicle->MaxForce()); 
+      
+        return m_vSteeringForce;
+      }
+    }
+  }
 
 
   //if (On(flee) && RandFloat() < Parameters::Instance()->prFlee)
@@ -585,62 +586,62 @@ Vector2D SteeringBehavior::CalculateDithered()
   }
 
 
-  //if (!isSpacePartitioningOn())
-  //{
-  //  if (On(allignment) && RandFloat() < Parameters::Instance()->prAlignment)
-  //  {
-  //    m_vSteeringForce += Alignment(m_pVehicle->World()->Agents()) *
-  //                        m_dWeightAlignment / Parameters::Instance()->prAlignment;
+  if (!isSpacePartitioningOn())
+  {
+    if (On(allignment) && RandFloat() < Parameters::Instance()->prAlignment)
+    {
+      m_vSteeringForce += Alignment(Arena::Agents()) *
+                          m_dWeightAlignment / Parameters::Instance()->prAlignment;
 
-  //    if (!m_vSteeringForce.isZero())
-  //    {
-  //      m_vSteeringForce.Truncate(m_pVehicle->MaxForce()); 
-  //    
-  //      return m_vSteeringForce;
-  //    }
-  //  }
+      if (!m_vSteeringForce.isZero())
+      {
+        m_vSteeringForce.Truncate(m_pVehicle->MaxForce()); 
+      
+        return m_vSteeringForce;
+      }
+    }
 
-  //  if (On(cohesion) && RandFloat() < Parameters::Instance()->prCohesion)
-  //  {
-  //    m_vSteeringForce += Cohesion(m_pVehicle->World()->Agents()) * 
-  //                        m_dWeightCohesion / Parameters::Instance()->prCohesion;
+    if (On(cohesion) && RandFloat() < Parameters::Instance()->prCohesion)
+    {
+      m_vSteeringForce += Cohesion(Arena::Agents()) * 
+                          m_dWeightCohesion / Parameters::Instance()->prCohesion;
 
-  //    if (!m_vSteeringForce.isZero())
-  //    {
-  //      m_vSteeringForce.Truncate(m_pVehicle->MaxForce()); 
-  //    
-  //      return m_vSteeringForce;
-  //    }
-  //  }
-  //}
-  //else
-  //{
-  //  if (On(allignment) && RandFloat() < Parameters::Instance()->prAlignment)
-  //  {
-  //    m_vSteeringForce += AlignmentPlus(m_pVehicle->World()->Agents()) *
-  //                        m_dWeightAlignment / Parameters::Instance()->prAlignment;
+      if (!m_vSteeringForce.isZero())
+      {
+        m_vSteeringForce.Truncate(m_pVehicle->MaxForce()); 
+      
+        return m_vSteeringForce;
+      }
+    }
+  }
+  else
+  {
+    if (On(allignment) && RandFloat() < Parameters::Instance()->prAlignment)
+    {
+      m_vSteeringForce += AlignmentPlus(Arena::Agents()) *
+                          m_dWeightAlignment / Parameters::Instance()->prAlignment;
 
-  //    if (!m_vSteeringForce.isZero())
-  //    {
-  //      m_vSteeringForce.Truncate(m_pVehicle->MaxForce()); 
-  //    
-  //      return m_vSteeringForce;
-  //    }
-  //  }
+      if (!m_vSteeringForce.isZero())
+      {
+        m_vSteeringForce.Truncate(m_pVehicle->MaxForce()); 
+      
+        return m_vSteeringForce;
+      }
+    }
 
-  //  if (On(cohesion) && RandFloat() < Parameters::Instance()->prCohesion)
-  //  {
-  //    m_vSteeringForce += CohesionPlus(m_pVehicle->World()->Agents()) *
-  //                        m_dWeightCohesion / Parameters::Instance()->prCohesion;
+    if (On(cohesion) && RandFloat() < Parameters::Instance()->prCohesion)
+    {
+      m_vSteeringForce += CohesionPlus(Arena::Agents()) *
+                          m_dWeightCohesion / Parameters::Instance()->prCohesion;
 
-  //    if (!m_vSteeringForce.isZero())
-  //    {
-  //      m_vSteeringForce.Truncate(m_pVehicle->MaxForce()); 
-  //    
-  //      return m_vSteeringForce;
-  //    }
-  //  }
-  //}
+      if (!m_vSteeringForce.isZero())
+      {
+        m_vSteeringForce.Truncate(m_pVehicle->MaxForce()); 
+      
+        return m_vSteeringForce;
+      }
+    }
+  }
 
   if (On(wander) && RandFloat() < Parameters::Instance()->prWander)
   {
@@ -707,12 +708,12 @@ Vector2D SteeringBehavior::Flee(Vector2D TargetPos)
 {
   //only flee if the target is within 'panic distance'. Work in distance
   //squared space.
- /* const double PanicDistanceSq = 100.0f * 100.0;
-  if (Vec2DDistanceSq(m_pVehicle->Pos(), target) > PanicDistanceSq)
-  {
-    return Vector2D(0,0);
-  }
-  */
+  //const double PanicDistanceSq = 100.0f * 100.0;
+  //if (Vec2DDistanceSq(m_pVehicle->Pos(), target) > PanicDistanceSq)
+  //{
+  //  return Vector2D(0,0);
+  //}
+  //
 
   Vector2D DesiredVelocity = Vec2DNormalize(m_pVehicle->Pos() - TargetPos) 
                             * m_pVehicle->MaxSpeed();
@@ -1054,110 +1055,110 @@ void SteeringBehavior::CreateFeelers()
 //
 // this calculates a force repelling from the other neighbors
 //------------------------------------------------------------------------
-//Vector2D SteeringBehavior::Separation(const vector<Vehicle*> &neighbors)
-//{  
-//  Vector2D SteeringForce;
-//
-//  for (unsigned int a=0; a<neighbors.size(); ++a)
-//  {
-//    //make sure this agent isn't included in the calculations and that
-//    //the agent being examined is close enough. ***also make sure it doesn't
-//    //include the evade target ***
-//    if((neighbors[a] != m_pVehicle) && neighbors[a]->IsTagged() &&
-//      (neighbors[a] != m_pTargetAgent1))
-//    {
-//      Vector2D ToAgent = m_pVehicle->Pos() - neighbors[a]->Pos();
-//
-//      //scale the force inversely proportional to the agents distance  
-//      //from its neighbor.
-//      SteeringForce += Vec2DNormalize(ToAgent)/ToAgent.Length();
-//    }
-//  }
-//
-//  return SteeringForce;
-//}
-//
-//
+Vector2D SteeringBehavior::Separation(const vector<Vehicle*> &neighbors)
+{  
+  Vector2D SteeringForce;
+
+  for (unsigned int a=0; a<neighbors.size(); ++a)
+  {
+    //make sure this agent isn't included in the calculations and that
+    //the agent being examined is close enough. ***also make sure it doesn't
+    //include the evade target ***
+    if((neighbors[a] != m_pVehicle) && neighbors[a]->IsTagged() &&
+      (neighbors[a] != m_pTargetAgent1))
+    {
+      Vector2D ToAgent = m_pVehicle->Pos() - neighbors[a]->Pos();
+
+      //scale the force inversely proportional to the agents distance  
+      //from its neighbor.
+      SteeringForce += Vec2DNormalize(ToAgent)/ToAgent.Length();
+    }
+  }
+
+  return SteeringForce;
+}
+
+
 ////---------------------------- Alignment ---------------------------------
 ////
 ////  returns a force that attempts to align this agents heading with that
 ////  of its neighbors
 ////------------------------------------------------------------------------
-//Vector2D SteeringBehavior::Alignment(const vector<Vehicle*>& neighbors)
-//{
-//  //used to record the average heading of the neighbors
-//  Vector2D AverageHeading;
-//
-//  //used to count the number of vehicles in the neighborhood
-//  int    NeighborCount = 0;
-//
-//  //iterate through all the tagged vehicles and sum their heading vectors  
-//  for (unsigned int a=0; a<neighbors.size(); ++a)
-//  {
-//    //make sure *this* agent isn't included in the calculations and that
-//    //the agent being examined  is close enough ***also make sure it doesn't
-//    //include any evade target ***
-//    if((neighbors[a] != m_pVehicle) && neighbors[a]->IsTagged() &&
-//      (neighbors[a] != m_pTargetAgent1))
-//    {
-//      AverageHeading += neighbors[a]->Heading();
-//
-//      ++NeighborCount;
-//    }
-//  }
-//
-//  //if the neighborhood contained one or more vehicles, average their
-//  //heading vectors.
-//  if (NeighborCount > 0)
-//  {
-//    AverageHeading /= (double)NeighborCount;
-//
-//    AverageHeading -= m_pVehicle->Heading();
-//  }
-//  
-//  return AverageHeading;
-//}
-//
+Vector2D SteeringBehavior::Alignment(const vector<Vehicle*>& neighbors)
+{
+  //used to record the average heading of the neighbors
+  Vector2D AverageHeading;
+
+  //used to count the number of vehicles in the neighborhood
+  int    NeighborCount = 0;
+
+  //iterate through all the tagged vehicles and sum their heading vectors  
+  for (unsigned int a=0; a<neighbors.size(); ++a)
+  {
+    //make sure *this* agent isn't included in the calculations and that
+    //the agent being examined  is close enough ***also make sure it doesn't
+    //include any evade target ***
+    if((neighbors[a] != m_pVehicle) && neighbors[a]->IsTagged() &&
+      (neighbors[a] != m_pTargetAgent1))
+    {
+      AverageHeading += neighbors[a]->Heading();
+
+      ++NeighborCount;
+    }
+  }
+
+  //if the neighborhood contained one or more vehicles, average their
+  //heading vectors.
+  if (NeighborCount > 0)
+  {
+    AverageHeading /= (double)NeighborCount;
+
+    AverageHeading -= m_pVehicle->Heading();
+  }
+  
+  return AverageHeading;
+}
+
 ////-------------------------------- Cohesion ------------------------------
 ////
 ////  returns a steering force that attempts to move the agent towards the
 ////  center of mass of the agents in its immediate area
 ////------------------------------------------------------------------------
-//Vector2D SteeringBehavior::Cohesion(const vector<Vehicle*> &neighbors)
-//{
-//  //first find the center of mass of all the agents
-//  Vector2D CenterOfMass, SteeringForce;
-//
-//  int NeighborCount = 0;
-//
-//  //iterate through the neighbors and sum up all the position vectors
-//  for (unsigned int a=0; a<neighbors.size(); ++a)
-//  {
-//    //make sure *this* agent isn't included in the calculations and that
-//    //the agent being examined is close enough ***also make sure it doesn't
-//    //include the evade target ***
-//    if((neighbors[a] != m_pVehicle) && neighbors[a]->IsTagged() &&
-//      (neighbors[a] != m_pTargetAgent1))
-//    {
-//      CenterOfMass += neighbors[a]->Pos();
-//
-//      ++NeighborCount;
-//    }
-//  }
-//
-//  if (NeighborCount > 0)
-//  {
-//    //the center of mass is the average of the sum of positions
-//    CenterOfMass /= (double)NeighborCount;
-//
-//    //now seek towards that position
-//    SteeringForce = Seek(CenterOfMass);
-//  }
-//
-//  //the magnitude of cohesion is usually much larger than separation or
-//  //allignment so it usually helps to normalize it.
-//  return Vec2DNormalize(SteeringForce);
-//}
+Vector2D SteeringBehavior::Cohesion(const vector<Vehicle*> &neighbors)
+{
+  //first find the center of mass of all the agents
+  Vector2D CenterOfMass, SteeringForce;
+
+  int NeighborCount = 0;
+
+  //iterate through the neighbors and sum up all the position vectors
+  for (unsigned int a=0; a<neighbors.size(); ++a)
+  {
+    //make sure *this* agent isn't included in the calculations and that
+    //the agent being examined is close enough ***also make sure it doesn't
+    //include the evade target ***
+    if((neighbors[a] != m_pVehicle) && neighbors[a]->IsTagged() &&
+      (neighbors[a] != m_pTargetAgent1))
+    {
+      CenterOfMass += neighbors[a]->Pos();
+
+      ++NeighborCount;
+    }
+  }
+
+  if (NeighborCount > 0)
+  {
+    //the center of mass is the average of the sum of positions
+    CenterOfMass /= (double)NeighborCount;
+
+    //now seek towards that position
+    SteeringForce = Seek(CenterOfMass);
+  }
+
+  //the magnitude of cohesion is usually much larger than separation or
+  //allignment so it usually helps to normalize it.
+  return Vec2DNormalize(SteeringForce);
+}
 
 
 /* NOTE: the next three behaviors are the same as the above three, except
@@ -1171,30 +1172,30 @@ void SteeringBehavior::CreateFeelers()
 //
 //  USES SPACIAL PARTITIONING
 //------------------------------------------------------------------------
-//Vector2D SteeringBehavior::SeparationPlus(const vector<Vehicle*> &neighbors)
-//{  
-//  Vector2D SteeringForce;
-//
-//  //iterate through the neighbors and sum up all the position vectors
-//  for (BaseGameEntity* pV = m_pVehicle->World()->CellSpace()->begin();
-//                         !m_pVehicle->World()->CellSpace()->end();     
-//                       pV = m_pVehicle->World()->CellSpace()->next())
-//  {    
-//    //make sure this agent isn't included in the calculations and that
-//    //the agent being examined is close enough
-//    if(pV != m_pVehicle)
-//    {
-//      Vector2D ToAgent = m_pVehicle->Pos() - pV->Pos();
-//
-//      //scale the force inversely proportional to the agents distance  
-//      //from its neighbor.
-//      SteeringForce += Vec2DNormalize(ToAgent)/ToAgent.Length();
-//    }
-//
-//  }
-//
-//  return SteeringForce;
-//}
+Vector2D SteeringBehavior::SeparationPlus(const vector<Vehicle*> &neighbors)
+{  
+  Vector2D SteeringForce;
+
+  //iterate through the neighbors and sum up all the position vectors
+  for (BaseGameEntity* pV = Arena::CellSpace()->begin();
+                         !Arena::CellSpace()->end();     
+                       pV = Arena::CellSpace()->next())
+  {    
+    //make sure this agent isn't included in the calculations and that
+    //the agent being examined is close enough
+    if(pV != m_pVehicle)
+    {
+      Vector2D ToAgent = m_pVehicle->Pos() - pV->Pos();
+
+      //scale the force inversely proportional to the agents distance  
+      //from its neighbor.
+      SteeringForce += Vec2DNormalize(ToAgent)/ToAgent.Length();
+    }
+
+  }
+
+  return SteeringForce;
+}
 ////---------------------------- Alignment ---------------------------------
 ////
 ////  returns a force that attempts to align this agents heading with that
@@ -1202,41 +1203,41 @@ void SteeringBehavior::CreateFeelers()
 ////
 ////  USES SPACIAL PARTITIONING
 ////------------------------------------------------------------------------
-//Vector2D SteeringBehavior::AlignmentPlus(const vector<Vehicle*> &neighbors)
-//{
-//  //This will record the average heading of the neighbors
-//  Vector2D AverageHeading;
-//
-//  //This count the number of vehicles in the neighborhood
-//  double    NeighborCount = 0.0;
-//
-//  //iterate through the neighbors and sum up all the position vectors
-//  for (MovingEntity* pV = m_pVehicle->World()->CellSpace()->begin();
-//                         !m_pVehicle->World()->CellSpace()->end();     
-//                     pV = m_pVehicle->World()->CellSpace()->next())
-//  {
-//    //make sure *this* agent isn't included in the calculations and that
-//    //the agent being examined  is close enough
-//    if(pV != m_pVehicle)
-//    {
-//      AverageHeading += pV->Heading();
-//
-//      ++NeighborCount;
-//    }
-//
-//  }
-//
-//  //if the neighborhood contained one or more vehicles, average their
-//  //heading vectors.
-//  if (NeighborCount > 0.0)
-//  {
-//    AverageHeading /= NeighborCount;
-//
-//    AverageHeading -= m_pVehicle->Heading();
-//  }
-//  
-//  return AverageHeading;
-//}
+Vector2D SteeringBehavior::AlignmentPlus(const vector<Vehicle*> &neighbors)
+{
+  //This will record the average heading of the neighbors
+  Vector2D AverageHeading;
+
+  //This count the number of vehicles in the neighborhood
+  double    NeighborCount = 0.0;
+
+  //iterate through the neighbors and sum up all the position vectors
+  for (MovingEntity* pV = Arena::CellSpace()->begin();
+                         !Arena::CellSpace()->end();     
+                     pV = Arena::CellSpace()->next())
+  {
+    //make sure *this* agent isn't included in the calculations and that
+    //the agent being examined  is close enough
+    if(pV != m_pVehicle)
+    {
+      AverageHeading += pV->Heading();
+
+      ++NeighborCount;
+    }
+
+  }
+
+  //if the neighborhood contained one or more vehicles, average their
+  //heading vectors.
+  if (NeighborCount > 0.0)
+  {
+    AverageHeading /= NeighborCount;
+
+    AverageHeading -= m_pVehicle->Heading();
+  }
+  
+  return AverageHeading;
+}
 //
 //
 ////-------------------------------- Cohesion ------------------------------
@@ -1246,41 +1247,41 @@ void SteeringBehavior::CreateFeelers()
 ////
 ////  USES SPACIAL PARTITIONING
 ////------------------------------------------------------------------------
-//Vector2D SteeringBehavior::CohesionPlus(const vector<Vehicle*> &neighbors)
-//{
-//  //first find the center of mass of all the agents
-//  Vector2D CenterOfMass, SteeringForce;
-//
-//  int NeighborCount = 0;
-//
-//  //iterate through the neighbors and sum up all the position vectors
-//  for (BaseGameEntity* pV = m_pVehicle->World()->CellSpace()->begin();
-//                         !m_pVehicle->World()->CellSpace()->end();     
-//                       pV = m_pVehicle->World()->CellSpace()->next())
-//  {
-//    //make sure *this* agent isn't included in the calculations and that
-//    //the agent being examined is close enough
-//    if(pV != m_pVehicle)
-//    {
-//      CenterOfMass += pV->Pos();
-//
-//      ++NeighborCount;
-//    }
-//  }
-//
-//  if (NeighborCount > 0)
-//  {
-//    //the center of mass is the average of the sum of positions
-//    CenterOfMass /= (double)NeighborCount;
-//
-//    //now seek towards that position
-//    SteeringForce = Seek(CenterOfMass);
-//  }
-//
-//  //the magnitude of cohesion is usually much larger than separation or
-//  //allignment so it usually helps to normalize it.
-//  return Vec2DNormalize(SteeringForce);
-//}
+Vector2D SteeringBehavior::CohesionPlus(const vector<Vehicle*> &neighbors)
+{
+  //first find the center of mass of all the agents
+  Vector2D CenterOfMass, SteeringForce;
+
+  int NeighborCount = 0;
+
+  //iterate through the neighbors and sum up all the position vectors
+  for (BaseGameEntity* pV = Arena::CellSpace()->begin();
+                         !Arena::CellSpace()->end();     
+                       pV = Arena::CellSpace()->next())
+  {
+    //make sure *this* agent isn't included in the calculations and that
+    //the agent being examined is close enough
+    if(pV != m_pVehicle)
+    {
+      CenterOfMass += pV->Pos();
+
+      ++NeighborCount;
+    }
+  }
+
+  if (NeighborCount > 0)
+  {
+    //the center of mass is the average of the sum of positions
+    CenterOfMass /= (double)NeighborCount;
+
+    //now seek towards that position
+    SteeringForce = Seek(CenterOfMass);
+  }
+
+  //the magnitude of cohesion is usually much larger than separation or
+  //allignment so it usually helps to normalize it.
+  return Vec2DNormalize(SteeringForce);
+}
 //
 //
 ////--------------------------- Interpose ----------------------------------

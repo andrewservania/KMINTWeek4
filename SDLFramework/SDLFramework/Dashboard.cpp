@@ -87,7 +87,9 @@ void Dashboard::Update()
 	FWApplication::GetInstance()->DrawTextOnScreen(comment13, 300, 380);
 
 	// Cow state label
-	CowStateLabel(Arena::cow->GetCurrentState());
+	//CowStateLabel(Arena::cow->GetCurrentState());
+	CowStateLabel("Pursuing rabbit");
+
 	FWApplication::GetInstance()->DrawTextOnScreen(cowStateLabel, 650, 90);
 	//FWApplication::GetInstance()->DrawTextOnScreen("NEEDS FIX IN DASHBOARD CLASS", 300, 420);
 

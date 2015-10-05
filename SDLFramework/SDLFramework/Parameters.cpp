@@ -3,7 +3,7 @@
 
 
 
-double Parameters::NumAgents = 1;
+int Parameters::NumAgents = 1;
 
 double Parameters::NumObstacles = 7;
 double Parameters::MinObstacleRadius = 10;
@@ -12,9 +12,9 @@ double Parameters::MaxObstacleRadius = 30;
 
 
 //number of horizontal cells used for spatial partitioning
-double Parameters::NumCellsX = 7;
+int Parameters::NumCellsX = 7;
 //number of vertical cells used for spatial partitioning
-double Parameters::NumCellsY = 7;
+int Parameters::NumCellsY = 7;
 
 
 //how many samples the smoother will use to average a value

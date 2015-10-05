@@ -232,19 +232,19 @@ private:
   //Vector2D Hide(const Vehicle* hunter, const std::vector<BaseGameEntity*>& obstacles);
 
 
-  //// -- Group Behaviors -- //
+  // -- Group Behaviors -- //
 
-  //Vector2D Cohesion(const std::vector<Vehicle*> &agents);
-  //
-  //Vector2D Separation(const std::vector<Vehicle*> &agents);
+  Vector2D Cohesion(const std::vector<Vehicle*> &agents);
+  
+  Vector2D Separation(const std::vector<Vehicle*> &agents);
 
-  //Vector2D Alignment(const std::vector<Vehicle*> &agents);
+  Vector2D Alignment(const std::vector<Vehicle*> &agents);
 
-  ////the following three are the same as above but they use cell-space
-  ////partitioning to find the neighbors
-  //Vector2D CohesionPlus(const std::vector<Vehicle*> &agents);
-  //Vector2D SeparationPlus(const std::vector<Vehicle*> &agents);
-  //Vector2D AlignmentPlus(const std::vector<Vehicle*> &agents);
+  //the following three are the same as above but they use cell-space
+  //partitioning to find the neighbors
+  Vector2D CohesionPlus(const std::vector<Vehicle*> &agents);
+  Vector2D SeparationPlus(const std::vector<Vehicle*> &agents);
+  Vector2D AlignmentPlus(const std::vector<Vehicle*> &agents);
 
     /* .......................................................
 
@@ -304,8 +304,8 @@ public:
 
   Vector2D Force()const{return m_vSteeringForce;}
 
-  //void      ToggleSpacePartitioningOnOff(){m_bCellSpaceOn = !m_bCellSpaceOn;}
-  //bool      isSpacePartitioningOn()const{return m_bCellSpaceOn;}
+  void      ToggleSpacePartitioningOnOff(){m_bCellSpaceOn = !m_bCellSpaceOn;}
+  bool      isSpacePartitioningOn()const{return m_bCellSpaceOn;}
 
   void      SetSummingMethod(summing_method sm){m_SummingMethod = sm;}
 
@@ -316,16 +316,19 @@ public:
   void WanderOn(){m_iFlags |= wander;}
   void PursuitOn(Vehicle* v){m_iFlags |= pursuit; m_pTargetAgent1 = v;}
   void EvadeOn(Vehicle* v){m_iFlags |= evade; m_pTargetAgent1 = v;}
-  //void CohesionOn(){m_iFlags |= cohesion;}
-  //void SeparationOn(){m_iFlags |= separation;}
-  //void AlignmentOn(){m_iFlags |= allignment;}
+
+  void CohesionOn(){m_iFlags |= cohesion;}
+  void SeparationOn(){m_iFlags |= separation;}
+  void AlignmentOn(){m_iFlags |= allignment;}
+
   //void ObstacleAvoidanceOn(){m_iFlags |= obstacle_avoidance;}
   //void WallAvoidanceOn(){m_iFlags |= wall_avoidance;}
   void FollowPathOn(){m_iFlags |= follow_path;}
   void InterposeOn(Vehicle* v1, Vehicle* v2){m_iFlags |= interpose; m_pTargetAgent1 = v1; m_pTargetAgent2 = v2;}
  // void HideOn(Vehicle* v){m_iFlags |= hide; m_pTargetAgent1 = v;}
   void OffsetPursuitOn(Vehicle* v1, const Vector2D offset){m_iFlags |= offset_pursuit; m_vOffset = offset; m_pTargetAgent1 = v1;}  
-  //void FlockingOn(){CohesionOn(); AlignmentOn(); SeparationOn(); WanderOn();}
+ 
+  void FlockingOn(){CohesionOn(); AlignmentOn(); SeparationOn(); WanderOn();}
 
   void FleeOff()  {if(On(flee))   m_iFlags ^=flee;}
   void SeekOff()  {if(On(seek))   m_iFlags ^=seek;}

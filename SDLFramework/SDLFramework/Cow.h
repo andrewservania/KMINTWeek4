@@ -17,7 +17,8 @@ public:
 	Node* currentNode;
 	StateMachine<Cow>* stateMachine;
 
-
+	//the steering behavior class
+	SteeringBehavior* steering;
 
 
 

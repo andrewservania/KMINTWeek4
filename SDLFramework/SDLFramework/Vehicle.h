@@ -9,7 +9,7 @@ class Vehicle :
 {
 protected:
 	//the steering behavior class
-	SteeringBehavior* steering;
+	//SteeringBehavior* steering;
 
 	//some steering behaviors give a jerky looking movement.
 	//The following members are used to smooth the vehicle's heading
@@ -47,7 +47,7 @@ public:
 	//virtual void Draw()=0;
 	
 	//// Accessor methods
-	SteeringBehavior* Steering() const { return steering; }
+	//SteeringBehavior* Steering() const { return steering; }
 	Vector2D SmoothingHeading() const { return smoothedHeading; }
 	bool isSmoothingOn() const {return smoothingOn;}
 	bool SmoothingOn() { smoothingOn = true; }

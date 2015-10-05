@@ -14,6 +14,7 @@ public:
 	Node* currentNode;
 	StateMachine<Rabbit>* stateMachine;
 
+	SteeringBehavior* steering;
 	bool pickedUpWeapon;
 	bool pickedUpPill;
 

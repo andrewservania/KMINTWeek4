@@ -8,6 +8,7 @@ CowPursuitState::CowPursuitState()
 
 //	Arena::Instance()->cow->Steering()->CreateRandomPath(3, 200, 200, 300, 300);
 //	Arena::Instance()->cow->Steering()->FollowPathOn();
+
 }
 
 
@@ -37,5 +38,6 @@ void CowPursuitState::Exit(Cow* cow)
 
 void CowPursuitState::Start(Cow* cow)
 {
-	cow->Steering()->PursuitOn(Arena::Instance()->rabbit);
+	cow->steering->FlockingOn();
+	cow->steering->PursuitOn(Arena::rabbit);
 }

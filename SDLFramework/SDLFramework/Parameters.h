@@ -2,7 +2,7 @@
 class Parameters
 {
 public:
-	static double NumAgents;
+	static int NumAgents;
 
 	static double NumObstacles;
 	static double MinObstacleRadius;
@@ -11,9 +11,9 @@ public:
 
 
 		//number of horizontal cells used for spatial partitioning
-	static double NumCellsX;
+	static int NumCellsX;
 		//number of vertical cells used for spatial partitioning
-	static double NumCellsY;
+	static int NumCellsY;
 
 
 		//how many samples the smoother will use to average a value

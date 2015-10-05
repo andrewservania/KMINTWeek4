@@ -4,7 +4,7 @@
 #include <assert.h>
 #include "CowPursuitState.h"
 #include "Parameters.h"
-
+#include "Arena.h"
 using namespace std;
 
 Cow::Cow(int id,
@@ -51,6 +51,9 @@ Cow::Cow(int id,
 	// Set up the state machine
 	stateMachine = new StateMachine<Cow>(this);
 	stateMachine->SetCurrentState(CowPursuitState::Instance());
+
+	steering->PursuitOn(Arena::rabbit);
+	steering->FlockingOn();
 	//stateMachine->SetGlobalState()
 	mApplication->AddRenderable(this);
 

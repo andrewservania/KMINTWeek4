@@ -20,7 +20,7 @@ RabbitWanderingState::~RabbitWanderingState()
 
 void RabbitWanderingState::Enter(Rabbit* rabbit)
 {
-	rabbit->Steering()->ArriveOn();
+	//rabbit->Steering()->ArriveOn();
 	rabbit->SetMaxSpeed(150);
 	Start(rabbit);
 
@@ -45,16 +45,25 @@ void RabbitWanderingState::Exit(Rabbit* rabbit)
 
 void RabbitWanderingState::Start(Rabbit* rabbit)
 {
-	Arena::Instance()->rabbit->Steering()->CreateRandomPath(3, 250, 250, 350, 350);
-	Arena::Instance()->rabbit->Steering()->FollowPathOn();
+	Arena::rabbit->steering->CreateRandomPath(3, 250, 250, 350, 350);
+	Arena::rabbit->steering->FollowPathOn();
 }
 
 bool RabbitWanderingState::IsThreatEminent(Rabbit* rabbit)
 {
-	float distanceBetweenCowAndRabbit = rabbit->DistanceTo(Arena::Instance()->cow);
-	if (distanceBetweenCowAndRabbit <= 200)
-		return true; 
-	else 
-		return false;
+	for each(auto& cow in Arena::aBunchOfCows)
+	{
+		float distanceBetweenCowAndRabbit = rabbit->DistanceTo(cow);
+
+
+
+
+		if (distanceBetweenCowAndRabbit <= 200)
+			return true; 
+		else 
+			return false;
+
+	}
+	return false;
 }
 
