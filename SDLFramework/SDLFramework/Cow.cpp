@@ -6,6 +6,37 @@
 #include "Parameters.h"
 
 using namespace std;
+////////////////////////////////////////////////////////////////////////////////////////////////////
+/// <summary>	Constructor. </summary>
+///
+/// Create a cow by providing an identifier, a position a, rotation value, a velocity value,
+/// a mass, a maximum force, a maximum speed, a maximum turn rate, a scale value and an enemy,
+/// in this case a rabbit.
+/// 
+/// The cow is created by 
+/// 1) being added to items that need to in the Arena,   
+/// 2) setting its score to 0  
+/// 3) loading a cow picture  
+/// 4) giving it a steering behavior  
+/// 5) setting a heading smoother  
+/// 6) giving it a set of random percentage values on the chances for its choices (Probability distribution)  
+/// 7) give it a state machine   
+/// 8) set the state machine to an initial global state  
+/// 9) set the cow's color to "nothing"
+///
+/// <remarks>	Andrew Servania,. </remarks>
+///
+/// <param name="id">			 	The identifier. </param>
+/// <param name="_position">	 	The position. </param>
+/// <param name="_rotation">	 	The rotation. </param>
+/// <param name="_velocity">	 	The velocity. </param>
+/// <param name="_mass">		 	The mass. </param>
+/// <param name="_max_force">	 	The maximum force. </param>
+/// <param name="_max_speed">	 	The maximum speed. </param>
+/// <param name="_max_turn_rate">	The maximum turn rate. </param>
+/// <param name="_scale">		 	The scale. </param>
+/// <param name="_enemy">		 	[in,out] If non-null, the enemy. </param>
+////////////////////////////////////////////////////////////////////////////////////////////////////
 
 Cow::Cow(int id,
 	Vector2D _position,
@@ -56,6 +87,16 @@ Cow::Cow(int id,
 
 }
 
+////////////////////////////////////////////////////////////////////////////////////////////////////
+/// <summary>	Updates the cow with a given deltaTime. </summary>
+///
+/// 1) The current state of the cow is updated.  
+/// 2) The force-driven speed of the cow is calculated and regulated  
+/// <remarks>	Andrew Servania,. </remarks>
+///
+/// <param name="deltaTime">	The delta time. </param>
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
 void Cow::Update(float deltaTime)
 {
 	stateMachine->Update();
@@ -97,53 +138,29 @@ void Cow::Update(float deltaTime)
 	
 }
 
+////////////////////////////////////////////////////////////////////////////////////////////////////
+/// <summary>	Destructor. </summary>
+///  
+///  The state machine is deleted.
+///  
+/// <remarks>	Andrew Servania,. </remarks>
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
 Cow::~Cow()
 {
 	delete stateMachine;
 }
 
-void Cow::setCurrentNode(Node* node)
-{
-	currentNode = node;
-	mX = node->GetBoundingBox().x;
-	mY = node->GetBoundingBox().y;
-}
 
-// Draw cow texture
+////////////////////////////////////////////////////////////////////////////////////////////////////
+/// <summary>	Draws the picture of the cow on screen. </summary>
+///
+/// <remarks>	Andrew Servania,. </remarks>
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
 void Cow::Draw()
 {
 	mApplication->DrawTexture(mTexture, mX, mY, 100, 100);
 }
 
-//Handle all clicks
-//void Cow::OnClick(SDL_Event& event)
-//{
-//	// Handle clicks that are made within the range in which the cow is situated on
-//	if (event.motion.x >= static_cast<Sint32>(mX - 90) &&
-//		event.motion.x <= static_cast<Sint32>(mX + 90) &&
-//		event.motion.y >= static_cast<Sint32>(mY - 90) &&
-//		event.motion.y <= static_cast<Sint32>(mY + 90))
-//	{
-//		if (event.button.button == SDL_BUTTON_LEFT)
-//			OnLeftClick(event);
-//		if (event.button.button == SDL_BUTTON_RIGHT)
-//			OnRightClick(event);
-//	}
-//}
-//
-//// Execute code when rabbit has been left clicked upon
-//void Cow::OnLeftClick(SDL_Event &event)
-//{
-//}
-//
-//// Execute code when rabbit has been right clicked upon
-//void Cow::OnRightClick(SDL_Event &event)
-//{
-//	printf("Right-clicked on cow!\n");
-//}
 
-// Put the cow at a random node that is not the same as the rabbit, weapon and pill
-void Cow::PutOnRandomLocation()
-{
-
-}

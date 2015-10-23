@@ -1,32 +1,56 @@
 #include "RabbitWanderingState.h"
 #include "Arena.h"
-#include "RabbitSearchForWeaponState.h"
-#include "ProbabilityDistribution.h"
-#include "RabbitSearchForPillState.h"
 #include "RabbitFleeingState.h"
-#include "CowSleepingState.h"
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+/// <summary>	Default constructor. </summary>
+///
+/// <remarks>	Andrew Servania,. </remarks>
+////////////////////////////////////////////////////////////////////////////////////////////////////
 
 RabbitWanderingState::RabbitWanderingState()
 {
-	//Arena::Instance()->rabbit->Steering()->WanderOn();
 
-//	Arena::Instance()->rabbit->Steering()->CreateRandomPath(3, 250, 250, 350, 350);
-//	Arena::Instance()->rabbit->Steering()->FollowPathOn();
 }
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+/// <summary>	Destructor. </summary>
+///
+/// <remarks>	Andrew Servania,. </remarks>
+////////////////////////////////////////////////////////////////////////////////////////////////////
 
 RabbitWanderingState::~RabbitWanderingState()
 {
 }
 
+////////////////////////////////////////////////////////////////////////////////////////////////////
+/// <summary>	Take action right after entering the state.
+/// 			Set the rabbit's maximum speed to 150.0 Call the Start() function. </summary>
+///
+/// <remarks>	Andrew Servania,. </remarks>
+///
+/// <param name="rabbit">	[in,out] If non-null, the rabbit. </param>
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
 void RabbitWanderingState::Enter(Rabbit* rabbit)
 {
-	rabbit->Steering()->ArriveOn();
 	rabbit->SetMaxSpeed(150);
 	Start(rabbit);
 
 }
 
-// Execute the code corresponding to the Wandering state for the rabbit
+////////////////////////////////////////////////////////////////////////////////////////////////////
+/// <summary>	A check is done to determine the rabbit already started wandering around. If not,
+/// 			the rabbit will start wondering around. 
+/// 			If the rabbit comes into threat by the cow. The rabbit's statechanges to a Fleeing 
+/// 			state.
+/// 			 </summary>
+///
+/// <remarks>	Andrew Servania,. </remarks>
+///
+/// <param name="rabbit">	[in,out] If non-null, the rabbit. </param>
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
 void RabbitWanderingState::Execute(Rabbit* rabbit)
 {
 	if (hasStarted = false)
@@ -36,18 +60,45 @@ void RabbitWanderingState::Execute(Rabbit* rabbit)
 	}
 	if (IsThreatEminent(rabbit))
 		rabbit->GetFSM()->ChangeState(RabbitFleeingState::Instance());
-	
+
 }
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+/// <summary>	Take action right before exiting the state. </summary>
+///
+/// <remarks>	Andrew Servania,. </remarks>
+///
+/// <param name="rabbit">	[in,out] If non-null, the rabbit. </param>
+////////////////////////////////////////////////////////////////////////////////////////////////////
 
 void RabbitWanderingState::Exit(Rabbit* rabbit)
 {
 }
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+/// <summary>	Create a path for the rabbit to wander around on. instruct the rabbit's steering 
+/// 			behavior to start following that path. </summary>
+///
+/// <remarks>	Andrew Servania,. </remarks>
+///
+/// <param name="rabbit">	[in,out] If non-null, the rabbit. </param>
+////////////////////////////////////////////////////////////////////////////////////////////////////
 
 void RabbitWanderingState::Start(Rabbit* rabbit)
 {
 	Arena::Instance()->rabbit->Steering()->CreateRandomPath(3, 250, 250, 350, 350);
 	Arena::Instance()->rabbit->Steering()->FollowPathOn();
 }
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+/// <summary>	Query if 'rabbit' is threat eminent. </summary>
+///
+/// <remarks>	Andrew Servania,. </remarks>
+///
+/// <param name="rabbit">	[in,out] If non-null, the rabbit. </param>
+///
+/// <returns>	true if threat eminent, false if not. </returns>
+////////////////////////////////////////////////////////////////////////////////////////////////////
 
 bool RabbitWanderingState::IsThreatEminent(Rabbit* rabbit)
 {

@@ -26,9 +26,6 @@ protected:
 	//some of the steering behvarios make use of this - see Wander)
 	double timeElapsed;
 
-	//buffer for the vehicle shape
-	//std::vector<Vector2D> vehicleVB;
-
 
 
 public:
@@ -44,7 +41,6 @@ public:
 
 	~Vehicle();
 	virtual void Update(float deltaTime)=0;
-	//virtual void Draw()=0;
 	
 	//// Accessor methods
 	SteeringBehavior* Steering() const { return steering; }

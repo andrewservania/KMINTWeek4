@@ -1,13 +1,12 @@
 #pragma once
-#include "IGameObject.h"
 #include "Cow.h"
 #include "Rabbit.h"
 #include "Vehicle.h"
 #include "CellSpacePartition.h"
 
-class Arena : public IGameObject
+class Arena 
 {
-private:
+
 	
 public:
 	  static Cow*cow;
@@ -16,7 +15,6 @@ public:
 
 	Arena();
 	~Arena();
-	void Update(float deltaTime) override;
 
 	static Arena* Instance()
 	{

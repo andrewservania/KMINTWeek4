@@ -2,6 +2,32 @@
 #include "RabbitWanderingState.h"
 #include "Parameters.h"
 
+////////////////////////////////////////////////////////////////////////////////////////////////////
+/// <summary>	Constructor. Create a rabbit by providing the an ID, a position vector, a rotation
+/// 			value, a velocity vector, a mass value, a maximum force, a maximum speed, a maximum
+/// 			turn rate and a scale.
+/// 			
+/// 			During the instantiation of rabbit the following actions will be taken:
+/// 			2) the rabbit will be given a steering behavior  
+/// 			3) the heading smoother will be instantiated  
+/// 			4) the rabbit will be added to items that must be shown on screen  
+/// 			5) the rabbit will be given a state machine   
+/// 			6) the rabbit's state will be set to a Wandering state  
+/// 		     </summary>
+///
+/// <remarks>	Andrew Servania,. </remarks>
+///
+/// <param name="id">			 	The identifier. </param>
+/// <param name="_position">	 	The position. </param>
+/// <param name="_rotation">	 	The rotation. </param>
+/// <param name="_velocity">	 	The velocity. </param>
+/// <param name="_mass">		 	The mass. </param>
+/// <param name="_max_force">	 	The maximum force. </param>
+/// <param name="_max_speed">	 	The maximum speed. </param>
+/// <param name="_max_turn_rate">	The maximum turn rate. </param>
+/// <param name="_scale">		 	The scale. </param>
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
 Rabbit::Rabbit(int id,
 	Vector2D _position,
 	double _rotation,
@@ -21,8 +47,6 @@ Rabbit::Rabbit(int id,
 					_scale)
 {
 	mTexture = mApplication->LoadTexture("rabbit-3.png");
-	pickedUpPill = false;
-	pickedUpWeapon = false;
 
 	// set the location of the cow on the screen
 	mX = static_cast<uint32_t>(position.x);
@@ -41,13 +65,30 @@ Rabbit::Rabbit(int id,
 	// Set up the state machine
 	stateMachine = new StateMachine<Rabbit>(this);
 	stateMachine->SetCurrentState(RabbitWanderingState::Instance());
-	//stateMachine->SetGlobalState()
 
 }
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+/// <summary>	Destructor. </summary>
+///
+/// <remarks>	Andrew Servania,. </remarks>
+////////////////////////////////////////////////////////////////////////////////////////////////////
 
 Rabbit::~Rabbit()
 {
 }
+////////////////////////////////////////////////////////////////////////////////////////////////////
+/// <summary>	The rabbit will be updated
+/// 			
+/// 			1) The state of the rabbit will be updated.  
+/// 			2) The force-driven movement of the rabbit will be calculated, regulated and updated  
+/// 			3) The arena will be treated as toroid, therefore the movement of the rabbit will be  
+/// 		       regulated to move accordingly. </summary>
+///
+/// <remarks>	Andrew Servania,. </remarks>
+///
+/// <param name="deltaTime">	The delta time. </param>
+////////////////////////////////////////////////////////////////////////////////////////////////////
 
 void Rabbit::Update(float deltaTime)
 {
@@ -89,27 +130,38 @@ void Rabbit::Update(float deltaTime)
 	if (isSmoothingOn()) smoothedHeading = headingSmoother->Update(Heading());
 }
 
-// Draw the rabbit texture
+////////////////////////////////////////////////////////////////////////////////////////////////////
+/// <summary>	Draw the rabbit texture. </summary>
+///
+/// <remarks>	Andrew Servania,. </remarks>
+////////////////////////////////////////////////////////////////////////////////////////////////////
 void Rabbit::Draw()
 {
 	mApplication->DrawTexture(mTexture, mX, mY, 100, 100);
 }
 
-// Execute code if rabbit has been left-clicked upon
+////////////////////////////////////////////////////////////////////////////////////////////////////
+/// <summary> NOT IN USE Trigger an action if the rabbit is left-clicked on.
+/// 		  Print in console window
+/// 		  </summary>
+///
+/// 
+/// <remarks>	Andrew Servania,. </remarks>
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
 void Rabbit::OnLeftClick()
 {
 	printf("Left-clicked on rabbit!\n");
 }
 
-// Execute code if rabbit has been right-clicked upon
+////////////////////////////////////////////////////////////////////////////////////////////////////
+/// <summary> NOT IN USE Trigger an action if the rabbit is right-clicked on.
+/// 		  Print in console window
+/// 		  </summary>
+/// <remarks>	Andrew Servania,. </remarks>
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
 void Rabbit::OnRightClick()
 {
 	printf("Right-clicked on rabbit!\n");
-}
-
-void Rabbit::setCurrentNode(Node* node)
-{
-	currentNode = node;
-	mX = node->GetBoundingBox().x;
-	mY = node->GetBoundingBox().y;
 }

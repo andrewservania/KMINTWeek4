@@ -1,5 +1,4 @@
 #pragma once
-#include "Node.h"
 
 #include "Vehicle.h"
 #include "StateMachine.h"
@@ -11,11 +10,7 @@ class Rabbit :
 	public Vehicle
 {
 public:
-	Node* currentNode;
 	StateMachine<Rabbit>* stateMachine;
-
-	bool pickedUpWeapon;
-	bool pickedUpPill;
 
 	Rabbit(int id,
 		Vector2D _position,
@@ -32,8 +27,6 @@ public:
 	virtual void Draw()override;
 	void OnLeftClick();
 	void OnRightClick();
-	void setCurrentNode(Node* node);
-	Node* getCurrentNode() { return currentNode; }
 	std::string GetCurrentState() { return stateMachine->CurrentState()->GetStateName(); }
 	StateMachine<Rabbit>* GetFSM() { return stateMachine; }
 };
