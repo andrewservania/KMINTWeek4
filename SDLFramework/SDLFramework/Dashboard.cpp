@@ -1,4 +1,3 @@
-
 #include "Dashboard.h"
 #include "FWApplication.h"
 #include "Arena.h"
@@ -11,8 +10,6 @@ std::string Dashboard::cowStateLabel;
 std::string Dashboard::rabbitStateLabel;
 /// <summary>	The dashboard cow sleeping turns. </summary>
 std::string Dashboard::cowSleepingTurns;
-
-
 
 using namespace std;
 
@@ -57,5 +54,4 @@ void Dashboard::Update()
 	// Rabbit state label
 	RabbitStateLabel(Arena::rabbit->GetCurrentState());
 	FWApplication::GetInstance()->DrawTextOnScreen(rabbitStateLabel, 650, 110);
-
 }

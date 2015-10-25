@@ -10,7 +10,6 @@
 
 RabbitWanderingState::RabbitWanderingState()
 {
-
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -36,13 +35,12 @@ void RabbitWanderingState::Enter(Rabbit* rabbit)
 {
 	rabbit->SetMaxSpeed(150);
 	Start(rabbit);
-
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 /// <summary>	A check is done to determine the rabbit already started wandering around. If not,
-/// 			the rabbit will start wondering around. 
-/// 			If the rabbit comes into threat by the cow. The rabbit's statechanges to a Fleeing 
+/// 			the rabbit will start wondering around.
+/// 			If the rabbit comes into threat by the cow. The rabbit's statechanges to a Fleeing
 /// 			state.
 /// 			 </summary>
 ///
@@ -60,7 +58,6 @@ void RabbitWanderingState::Execute(Rabbit* rabbit)
 	}
 	if (IsThreatEminent(rabbit))
 		rabbit->GetFSM()->ChangeState(RabbitFleeingState::Instance());
-
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -76,7 +73,7 @@ void RabbitWanderingState::Exit(Rabbit* rabbit)
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-/// <summary>	Create a path for the rabbit to wander around on. instruct the rabbit's steering 
+/// <summary>	Create a path for the rabbit to wander around on. instruct the rabbit's steering
 /// 			behavior to start following that path. </summary>
 ///
 /// <remarks>	Andrew Servania,. </remarks>
@@ -104,8 +101,7 @@ bool RabbitWanderingState::IsThreatEminent(Rabbit* rabbit)
 {
 	float distanceBetweenCowAndRabbit = rabbit->DistanceTo(Arena::Instance()->cow);
 	if (distanceBetweenCowAndRabbit <= 200)
-		return true; 
-	else 
+		return true;
+	else
 		return false;
 }
-

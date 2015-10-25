@@ -9,16 +9,9 @@
 class Cow :
 	public Vehicle
 {
-
-
-
 public:
 
 	StateMachine<Cow>* stateMachine;
-
-
-
-
 
 	Cow(int id,
 		Vector2D _position,
@@ -35,7 +28,4 @@ public:
 	virtual void Draw()override;
 	StateMachine<Cow>* GetFSM() const { return stateMachine; }
 	std::string GetCurrentState() { return stateMachine->CurrentState()->GetStateName(); }
-
-
-
 };

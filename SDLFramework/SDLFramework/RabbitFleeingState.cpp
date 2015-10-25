@@ -11,7 +11,6 @@
 
 RabbitFleeingState::RabbitFleeingState()
 {
-
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -22,7 +21,6 @@ RabbitFleeingState::RabbitFleeingState()
 
 RabbitFleeingState::~RabbitFleeingState()
 {
-
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -77,7 +75,7 @@ void RabbitFleeingState::Exit(Rabbit* rabbit)
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-/// <summary>	Upon calling this function, the rabbit's maximum speed will be set to 
+/// <summary>	Upon calling this function, the rabbit's maximum speed will be set to
 /// 			100000.0 and the rabbbit will start evading the cow. </summary>
 ///
 /// <remarks>	Andrew Servania,. </remarks>
@@ -106,7 +104,7 @@ bool RabbitFleeingState::NoThreat(Rabbit* rabbit)
 {
 	float distanceBetweenCowAndRabbit = rabbit->DistanceTo(Arena::Instance()->cow);
 	if (distanceBetweenCowAndRabbit >= 600.0)
-		return true; 
-	else 
+		return true;
+	else
 		return false;
 }

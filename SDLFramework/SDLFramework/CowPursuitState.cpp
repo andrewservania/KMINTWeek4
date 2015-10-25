@@ -9,7 +9,6 @@
 
 CowPursuitState::CowPursuitState()
 {
-	
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -23,7 +22,7 @@ CowPursuitState::~CowPursuitState()
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-/// <summary>	Take action right after entering the state. 
+/// <summary>	Take action right after entering the state.
 /// 			The start() function is called. </summary>
 ///
 /// <remarks>	Andrew Servania,. </remarks>

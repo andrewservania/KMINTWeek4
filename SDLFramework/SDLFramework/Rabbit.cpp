@@ -6,13 +6,13 @@
 /// <summary>	Constructor. Create a rabbit by providing the an ID, a position vector, a rotation
 /// 			value, a velocity vector, a mass value, a maximum force, a maximum speed, a maximum
 /// 			turn rate and a scale.
-/// 			
+///
 /// 			During the instantiation of rabbit the following actions will be taken:
-/// 			2) the rabbit will be given a steering behavior  
-/// 			3) the heading smoother will be instantiated  
-/// 			4) the rabbit will be added to items that must be shown on screen  
-/// 			5) the rabbit will be given a state machine   
-/// 			6) the rabbit's state will be set to a Wandering state  
+/// 			2) the rabbit will be given a steering behavior
+/// 			3) the heading smoother will be instantiated
+/// 			4) the rabbit will be added to items that must be shown on screen
+/// 			5) the rabbit will be given a state machine
+/// 			6) the rabbit's state will be set to a Wandering state
 /// 		     </summary>
 ///
 /// <remarks>	Andrew Servania,. </remarks>
@@ -37,14 +37,14 @@ Rabbit::Rabbit(int id,
 	double _max_speed,
 	double _max_turn_rate,
 	double _scale) : Vehicle(id,
-					_position,
-					_rotation,
-					_velocity,
-					_mass,
-					_max_force,
-					_max_speed,
-					_max_turn_rate,
-					_scale)
+	_position,
+	_rotation,
+	_velocity,
+	_mass,
+	_max_force,
+	_max_speed,
+	_max_turn_rate,
+	_scale)
 {
 	mTexture = mApplication->LoadTexture("rabbit-3.png");
 
@@ -65,7 +65,6 @@ Rabbit::Rabbit(int id,
 	// Set up the state machine
 	stateMachine = new StateMachine<Rabbit>(this);
 	stateMachine->SetCurrentState(RabbitWanderingState::Instance());
-
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -79,10 +78,10 @@ Rabbit::~Rabbit()
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 /// <summary>	The rabbit will be updated
-/// 			
-/// 			1) The state of the rabbit will be updated.  
-/// 			2) The force-driven movement of the rabbit will be calculated, regulated and updated  
-/// 			3) The arena will be treated as toroid, therefore the movement of the rabbit will be  
+///
+/// 			1) The state of the rabbit will be updated.
+/// 			2) The force-driven movement of the rabbit will be calculated, regulated and updated
+/// 			3) The arena will be treated as toroid, therefore the movement of the rabbit will be
 /// 		       regulated to move accordingly. </summary>
 ///
 /// <remarks>	Andrew Servania,. </remarks>
@@ -145,7 +144,7 @@ void Rabbit::Draw()
 /// 		  Print in console window
 /// 		  </summary>
 ///
-/// 
+///
 /// <remarks>	Andrew Servania,. </remarks>
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 

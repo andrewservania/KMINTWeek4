@@ -391,7 +391,6 @@ void FWApplication::DrawRect(int startPosX, int startPosY, int width, int height
 	}
 }
 
-
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 /// <summary>	Adds a renderable. </summary>
 ///

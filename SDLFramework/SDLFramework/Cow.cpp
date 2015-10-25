@@ -12,16 +12,16 @@ using namespace std;
 /// Create a cow by providing an identifier, a position a, rotation value, a velocity value,
 /// a mass, a maximum force, a maximum speed, a maximum turn rate, a scale value and an enemy,
 /// in this case a rabbit.
-/// 
-/// The cow is created by 
-/// 1) being added to items that need to in the Arena,   
-/// 2) setting its score to 0  
-/// 3) loading a cow picture  
-/// 4) giving it a steering behavior  
-/// 5) setting a heading smoother  
-/// 6) giving it a set of random percentage values on the chances for its choices (Probability distribution)  
-/// 7) give it a state machine   
-/// 8) set the state machine to an initial global state  
+///
+/// The cow is created by
+/// 1) being added to items that need to in the Arena,
+/// 2) setting its score to 0
+/// 3) loading a cow picture
+/// 4) giving it a steering behavior
+/// 5) setting a heading smoother
+/// 6) giving it a set of random percentage values on the chances for its choices (Probability distribution)
+/// 7) give it a state machine
+/// 8) set the state machine to an initial global state
 /// 9) set the cow's color to "nothing"
 ///
 /// <remarks>	Andrew Servania,. </remarks>
@@ -47,16 +47,15 @@ Cow::Cow(int id,
 	double _max_speed,
 	double _max_turn_rate,
 	double _scale) : Vehicle(id,
-					 _position,
-					 _rotation,
-					 _velocity,
-					 _mass,
-					 _max_force,
-					 _max_speed,
-					 _max_turn_rate,
-					 _scale)
+	_position,
+	_rotation,
+	_velocity,
+	_mass,
+	_max_force,
+	_max_speed,
+	_max_turn_rate,
+	_scale)
 {
-
 	//smoothedHeading = Vector2D(0, 0);
 	//smoothingOn = false ;
 	//timeElapsed = 0.0;
@@ -67,8 +66,6 @@ Cow::Cow(int id,
 	// set the location of the cow on the screen
 	mX = static_cast<uint32_t>(position.x);
 	mY = static_cast<uint32_t>(position.y);
-
-
 
 	// set up the steering behavior class
 	steering = new SteeringBehavior(this);
@@ -84,14 +81,13 @@ Cow::Cow(int id,
 	stateMachine->SetCurrentState(CowPursuitState::Instance());
 	//stateMachine->SetGlobalState()
 	mApplication->AddRenderable(this);
-
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 /// <summary>	Updates the cow with a given deltaTime. </summary>
 ///
-/// 1) The current state of the cow is updated.  
-/// 2) The force-driven speed of the cow is calculated and regulated  
+/// 1) The current state of the cow is updated.
+/// 2) The force-driven speed of the cow is calculated and regulated
 /// <remarks>	Andrew Servania,. </remarks>
 ///
 /// <param name="deltaTime">	The delta time. </param>
@@ -135,14 +131,13 @@ void Cow::Update(float deltaTime)
 	WrapAround(position, 1300, 700);
 
 	if (isSmoothingOn()) smoothedHeading = headingSmoother->Update(Heading());
-	
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 /// <summary>	Destructor. </summary>
-///  
+///
 ///  The state machine is deleted.
-///  
+///
 /// <remarks>	Andrew Servania,. </remarks>
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -150,7 +145,6 @@ Cow::~Cow()
 {
 	delete stateMachine;
 }
-
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 /// <summary>	Draws the picture of the cow on screen. </summary>
@@ -162,5 +156,3 @@ void Cow::Draw()
 {
 	mApplication->DrawTexture(mTexture, mX, mY, 100, 100);
 }
-
-

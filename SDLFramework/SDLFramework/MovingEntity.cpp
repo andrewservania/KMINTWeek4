@@ -1,11 +1,11 @@
 #include "MovingEntity.h"
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-/// <summary>	Constructor. Create a moving entity by providing an identifier, a position vector, 
+/// <summary>	Constructor. Create a moving entity by providing an identifier, a position vector,
 /// a radius a velocity vector, a maximum speed, a heading vector, a mass, a scale, a turn rate,
 /// and a maximum force.
 ///   </summary>
-/// 
+///
 /// <remarks>	Andrew Servania,. </remarks>
 ///
 /// <param name="id">		 	The identifier. </param>
@@ -61,6 +61,4 @@ MovingEntity::~MovingEntity()
 
 void MovingEntity::Update(float deltaTime)
 {
-
-
 }

@@ -4,14 +4,11 @@
 #include "Vehicle.h"
 #include "CellSpacePartition.h"
 
-class Arena 
+class Arena
 {
-
-	
 public:
-	  static Cow*cow;
-	  static Rabbit*rabbit;
-
+	static Cow*cow;
+	static Rabbit*rabbit;
 
 	Arena();
 	~Arena();
@@ -23,4 +20,3 @@ public:
 		return &instance;
 	}
 };
-
